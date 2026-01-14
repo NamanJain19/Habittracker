@@ -1,7 +1,19 @@
 import { MemberProvider } from '@/integrations';
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
 import { ScrollToTop } from '@/lib/scroll-to-top';
+import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
 import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
+import HomePage from '@/components/pages/HomePage';
+import DashboardPage from '@/components/pages/DashboardPage';
+import HabitsPage from '@/components/pages/HabitsPage';
+import GoalsPage from '@/components/pages/GoalsPage';
+import ProductivityPage from '@/components/pages/ProductivityPage';
+import FitnessPage from '@/components/pages/FitnessPage';
+import WellnessPage from '@/components/pages/WellnessPage';
+import CommunityPage from '@/components/pages/CommunityPage';
+import RemindersPage from '@/components/pages/RemindersPage';
+import ProfilePage from '@/components/pages/ProfilePage';
+import SettingsPage from '@/components/pages/SettingsPage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -21,9 +33,119 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <div>Wix Vibe</div>,
+        element: <HomePage />,
         routeMetadata: {
           pageIdentifier: 'home',
+        },
+      },
+      {
+        path: "dashboard",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to access your dashboard">
+            <DashboardPage />
+          </MemberProtectedRoute>
+        ),
+        routeMetadata: {
+          pageIdentifier: 'dashboard',
+        },
+      },
+      {
+        path: "habits",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to track your habits">
+            <HabitsPage />
+          </MemberProtectedRoute>
+        ),
+        routeMetadata: {
+          pageIdentifier: 'habits',
+        },
+      },
+      {
+        path: "goals",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to manage your goals">
+            <GoalsPage />
+          </MemberProtectedRoute>
+        ),
+        routeMetadata: {
+          pageIdentifier: 'goals',
+        },
+      },
+      {
+        path: "productivity",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to track your productivity">
+            <ProductivityPage />
+          </MemberProtectedRoute>
+        ),
+        routeMetadata: {
+          pageIdentifier: 'productivity',
+        },
+      },
+      {
+        path: "fitness",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to track your fitness">
+            <FitnessPage />
+          </MemberProtectedRoute>
+        ),
+        routeMetadata: {
+          pageIdentifier: 'fitness',
+        },
+      },
+      {
+        path: "wellness",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to track your wellness">
+            <WellnessPage />
+          </MemberProtectedRoute>
+        ),
+        routeMetadata: {
+          pageIdentifier: 'wellness',
+        },
+      },
+      {
+        path: "community",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to join the community">
+            <CommunityPage />
+          </MemberProtectedRoute>
+        ),
+        routeMetadata: {
+          pageIdentifier: 'community',
+        },
+      },
+      {
+        path: "reminders",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to manage your reminders">
+            <RemindersPage />
+          </MemberProtectedRoute>
+        ),
+        routeMetadata: {
+          pageIdentifier: 'reminders',
+        },
+      },
+      {
+        path: "profile",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to view your profile">
+            <ProfilePage />
+          </MemberProtectedRoute>
+        ),
+        routeMetadata: {
+          pageIdentifier: 'profile',
+        },
+      },
+      {
+        path: "settings",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to manage your settings">
+            <SettingsPage />
+          </MemberProtectedRoute>
+        ),
+        routeMetadata: {
+          pageIdentifier: 'settings',
         },
       },
       {
