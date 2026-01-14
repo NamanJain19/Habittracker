@@ -14,6 +14,11 @@ import CommunityPage from '@/components/pages/CommunityPage';
 import RemindersPage from '@/components/pages/RemindersPage';
 import ProfilePage from '@/components/pages/ProfilePage';
 import SettingsPage from '@/components/pages/SettingsPage';
+import AboutPage from '@/components/pages/AboutPage';
+import SupportPage from '@/components/pages/SupportPage';
+import PrivacyPage from '@/components/pages/PrivacyPage';
+import TermsPage from '@/components/pages/TermsPage';
+import ContactPage from '@/components/pages/ContactPage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -146,6 +151,41 @@ const router = createBrowserRouter([
         ),
         routeMetadata: {
           pageIdentifier: 'settings',
+        },
+      },
+      {
+        path: "about",
+        element: <AboutPage />,
+        routeMetadata: {
+          pageIdentifier: 'about',
+        },
+      },
+      {
+        path: "support",
+        element: <SupportPage />,
+        routeMetadata: {
+          pageIdentifier: 'support',
+        },
+      },
+      {
+        path: "privacy",
+        element: <PrivacyPage />,
+        routeMetadata: {
+          pageIdentifier: 'privacy',
+        },
+      },
+      {
+        path: "terms",
+        element: <TermsPage />,
+        routeMetadata: {
+          pageIdentifier: 'terms',
+        },
+      },
+      {
+        path: "contact",
+        element: <ContactPage />,
+        routeMetadata: {
+          pageIdentifier: 'contact',
         },
       },
       {

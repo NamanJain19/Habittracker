@@ -12,14 +12,14 @@ export default function Footer() {
     resources: [
       { name: 'Profile', href: '/profile' },
       { name: 'Settings', href: '/settings' },
-      { name: 'Support', href: '#' },
-      { name: 'Documentation', href: '#' },
+      { name: 'Support', href: '/support' },
+      { name: 'Documentation', href: '/support' },
     ],
     company: [
-      { name: 'About', href: '#' },
-      { name: 'Privacy Policy', href: '#' },
-      { name: 'Terms of Service', href: '#' },
-      { name: 'Contact', href: '#' },
+      { name: 'About', href: '/about' },
+      { name: 'Privacy Policy', href: '/privacy' },
+      { name: 'Terms of Service', href: '/terms' },
+      { name: 'Contact', href: '/contact' },
     ],
   };
 
