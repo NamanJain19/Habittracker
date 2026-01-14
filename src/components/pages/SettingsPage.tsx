@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Settings, Save } from 'lucide-react';
+import { Settings, Save, CheckCircle2 } from 'lucide-react';
 import { BaseCrudService } from '@/integrations';
 import { UserSettings } from '@/entities';
+import { useThemeStore } from '@/lib/theme-store';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -14,13 +15,15 @@ import { LoadingSpinner } from '@/components/ui/loading-spinner';
 export default function SettingsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
   const [settings, setSettings] = useState<UserSettings | null>(null);
+  const { theme, language, setTheme, setLanguage } = useThemeStore();
   const [formData, setFormData] = useState({
-    themePreference: 'dark',
+    themePreference: theme,
     enableNotifications: true,
     notificationSound: true,
     shareActivityData: false,
-    languagePreference: 'en',
+    languagePreference: language,
   });
 
   useEffect(() => {
@@ -34,19 +37,37 @@ export default function SettingsPage() {
       if (result.items.length > 0) {
         const userSettings = result.items[0];
         setSettings(userSettings);
+        const loadedTheme = (userSettings.themePreference || 'dark') as 'dark' | 'light' | 'auto';
+        const loadedLang = userSettings.languagePreference || 'en';
+        
         setFormData({
-          themePreference: userSettings.themePreference || 'dark',
+          themePreference: loadedTheme,
           enableNotifications: userSettings.enableNotifications !== undefined ? userSettings.enableNotifications : true,
           notificationSound: userSettings.notificationSound !== undefined ? userSettings.notificationSound : true,
           shareActivityData: userSettings.shareActivityData || false,
-          languagePreference: userSettings.languagePreference || 'en',
+          languagePreference: loadedLang,
         });
+        
+        // Apply loaded settings
+        setTheme(loadedTheme);
+        setLanguage(loadedLang);
       }
     } catch (error) {
       console.error('Error loading settings:', error);
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleThemeChange = (value: string) => {
+    const newTheme = value as 'dark' | 'light' | 'auto';
+    setFormData({ ...formData, themePreference: newTheme });
+    setTheme(newTheme);
+  };
+
+  const handleLanguageChange = (value: string) => {
+    setFormData({ ...formData, languagePreference: value });
+    setLanguage(value);
   };
 
   const handleSave = async () => {
@@ -64,6 +85,9 @@ export default function SettingsPage() {
         });
         setSettings(newSettings);
       }
+      
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 3000);
     } catch (error) {
       console.error('Error saving settings:', error);
     } finally {
@@ -72,7 +96,7 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-background text-light-foreground">
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
       <Header />
       
       <main className="pt-24 pb-16 px-6 lg:px-8">
@@ -85,12 +109,12 @@ export default function SettingsPage() {
             {/* Header */}
             <div className="space-y-2">
               <h1 className="font-heading text-5xl lg:text-6xl font-bold">
-                <span className="text-light-foreground">App</span>{' '}
-                <span className="bg-gradient-to-r from-accent-teal to-accent-purple bg-clip-text text-transparent">
+                <span className="text-[var(--text-primary)]">App</span>{' '}
+                <span className="bg-gradient-to-r from-accent-cyan to-accent-purple bg-clip-text text-transparent">
                   Settings
                 </span>
               </h1>
-              <p className="font-paragraph text-lg text-light-foreground/70">
+              <p className="font-paragraph text-lg text-[var(--text-secondary)]">
                 Customize your experience and preferences
               </p>
             </div>
@@ -104,45 +128,50 @@ export default function SettingsPage() {
               ) : (
                 <div className="space-y-6">
                   {/* Appearance */}
-                  <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-                    <h3 className="font-heading text-2xl font-bold text-light-foreground mb-6">
+                  <div className="glass-card glass-card-hover neomorph-shadow p-8">
+                    <h3 className="font-heading text-2xl font-bold text-[var(--text-primary)] mb-6">
                       Appearance
                     </h3>
                     <div className="space-y-4">
                       <div>
-                        <Label htmlFor="themePreference" className="font-paragraph text-light-foreground mb-2 block">
+                        <Label htmlFor="themePreference" className="font-paragraph text-[var(--text-primary)] mb-2 block">
                           Theme
                         </Label>
                         <Select
                           value={formData.themePreference}
-                          onValueChange={(value) => setFormData({ ...formData, themePreference: value })}
+                          onValueChange={handleThemeChange}
                         >
-                          <SelectTrigger className="bg-white/5 border-white/10 text-light-foreground font-paragraph">
+                          <SelectTrigger className="bg-[var(--bg-elevated)] border-[var(--glass-border)] text-[var(--text-primary)] font-paragraph">
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent className="bg-dark-background border-white/10">
-                            <SelectItem value="dark" className="font-paragraph text-light-foreground">Dark Mode</SelectItem>
-                            <SelectItem value="light" className="font-paragraph text-light-foreground">Light Mode</SelectItem>
-                            <SelectItem value="auto" className="font-paragraph text-light-foreground">Auto</SelectItem>
+                          <SelectContent className="bg-[var(--bg-surface)] border-[var(--glass-border)]">
+                            <SelectItem value="dark" className="font-paragraph text-[var(--text-primary)]">🌙 Dark Mode</SelectItem>
+                            <SelectItem value="light" className="font-paragraph text-[var(--text-primary)]">☀️ Light Mode</SelectItem>
+                            <SelectItem value="auto" className="font-paragraph text-[var(--text-primary)]">🔄 Auto (System)</SelectItem>
                           </SelectContent>
                         </Select>
+                        <p className="font-paragraph text-xs text-[var(--text-secondary)] mt-2">
+                          {formData.themePreference === 'auto' 
+                            ? 'Automatically switches based on your system preferences' 
+                            : `Currently using ${formData.themePreference} mode`}
+                        </p>
                       </div>
                       <div>
-                        <Label htmlFor="languagePreference" className="font-paragraph text-light-foreground mb-2 block">
+                        <Label htmlFor="languagePreference" className="font-paragraph text-[var(--text-primary)] mb-2 block">
                           Language
                         </Label>
                         <Select
                           value={formData.languagePreference}
-                          onValueChange={(value) => setFormData({ ...formData, languagePreference: value })}
+                          onValueChange={handleLanguageChange}
                         >
-                          <SelectTrigger className="bg-white/5 border-white/10 text-light-foreground font-paragraph">
+                          <SelectTrigger className="bg-[var(--bg-elevated)] border-[var(--glass-border)] text-[var(--text-primary)] font-paragraph">
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent className="bg-dark-background border-white/10">
-                            <SelectItem value="en" className="font-paragraph text-light-foreground">English</SelectItem>
-                            <SelectItem value="es" className="font-paragraph text-light-foreground">Español</SelectItem>
-                            <SelectItem value="fr" className="font-paragraph text-light-foreground">Français</SelectItem>
-                            <SelectItem value="de" className="font-paragraph text-light-foreground">Deutsch</SelectItem>
+                          <SelectContent className="bg-[var(--bg-surface)] border-[var(--glass-border)]">
+                            <SelectItem value="en" className="font-paragraph text-[var(--text-primary)]">🇺🇸 English</SelectItem>
+                            <SelectItem value="es" className="font-paragraph text-[var(--text-primary)]">🇪🇸 Español</SelectItem>
+                            <SelectItem value="fr" className="font-paragraph text-[var(--text-primary)]">🇫🇷 Français</SelectItem>
+                            <SelectItem value="de" className="font-paragraph text-[var(--text-primary)]">🇩🇪 Deutsch</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -150,17 +179,17 @@ export default function SettingsPage() {
                   </div>
 
                   {/* Notifications */}
-                  <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-                    <h3 className="font-heading text-2xl font-bold text-light-foreground mb-6">
+                  <div className="glass-card glass-card-hover neomorph-shadow p-8">
+                    <h3 className="font-heading text-2xl font-bold text-[var(--text-primary)] mb-6">
                       Notifications
                     </h3>
                     <div className="space-y-6">
                       <div className="flex items-center justify-between">
                         <div>
-                          <Label htmlFor="enableNotifications" className="font-paragraph text-light-foreground">
+                          <Label htmlFor="enableNotifications" className="font-paragraph text-[var(--text-primary)]">
                             Enable Notifications
                           </Label>
-                          <p className="font-paragraph text-sm text-light-foreground/60 mt-1">
+                          <p className="font-paragraph text-sm text-[var(--text-secondary)] mt-1">
                             Receive reminders and updates
                           </p>
                         </div>
@@ -172,10 +201,10 @@ export default function SettingsPage() {
                       </div>
                       <div className="flex items-center justify-between">
                         <div>
-                          <Label htmlFor="notificationSound" className="font-paragraph text-light-foreground">
+                          <Label htmlFor="notificationSound" className="font-paragraph text-[var(--text-primary)]">
                             Notification Sound
                           </Label>
-                          <p className="font-paragraph text-sm text-light-foreground/60 mt-1">
+                          <p className="font-paragraph text-sm text-[var(--text-secondary)] mt-1">
                             Play sound for notifications
                           </p>
                         </div>
@@ -189,17 +218,17 @@ export default function SettingsPage() {
                   </div>
 
                   {/* Privacy */}
-                  <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-                    <h3 className="font-heading text-2xl font-bold text-light-foreground mb-6">
+                  <div className="glass-card glass-card-hover neomorph-shadow p-8">
+                    <h3 className="font-heading text-2xl font-bold text-[var(--text-primary)] mb-6">
                       Privacy
                     </h3>
                     <div className="space-y-6">
                       <div className="flex items-center justify-between">
                         <div>
-                          <Label htmlFor="shareActivityData" className="font-paragraph text-light-foreground">
+                          <Label htmlFor="shareActivityData" className="font-paragraph text-[var(--text-primary)]">
                             Share Activity Data
                           </Label>
-                          <p className="font-paragraph text-sm text-light-foreground/60 mt-1">
+                          <p className="font-paragraph text-sm text-[var(--text-secondary)] mt-1">
                             Share your progress with the community
                           </p>
                         </div>
@@ -216,12 +245,17 @@ export default function SettingsPage() {
                   <Button
                     onClick={handleSave}
                     disabled={isSaving}
-                    className="w-full bg-gradient-to-br from-accent-teal to-accent-purple text-black font-bold py-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 font-paragraph text-base"
+                    className="w-full bg-gradient-to-br from-accent-cyan to-accent-purple text-white font-bold py-4 rounded-[18px] shadow-md hover:shadow-lg transition-all duration-300 font-paragraph text-base ai-glow-cyan"
                   >
                     {isSaving ? (
                       <>
                         <LoadingSpinner />
                         <span className="ml-2">Saving...</span>
+                      </>
+                    ) : showSuccess ? (
+                      <>
+                        <CheckCircle2 className="w-5 h-5 mr-2" />
+                        Settings Saved!
                       </>
                     ) : (
                       <>
