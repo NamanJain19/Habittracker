@@ -2,72 +2,52 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 interface ThemeState {
-  theme: 'dark' | 'light' | 'auto';
-  language: string;
-  setTheme: (theme: 'dark' | 'light' | 'auto') => void;
-  setLanguage: (language: string) => void;
-  getEffectiveTheme: () => 'dark' | 'light';
+  theme: 'dark' | 'light';
+  setTheme: (theme: 'dark' | 'light') => void;
+  toggleTheme: () => void;
 }
 
 export const useThemeStore = create<ThemeState>()(
   persist(
     (set, get) => ({
-      theme: 'dark',
-      language: 'en',
+      theme: 'light',
       setTheme: (theme) => {
         set({ theme });
         applyTheme(theme);
       },
-      setLanguage: (language) => set({ language }),
-      getEffectiveTheme: () => {
-        const { theme } = get();
-        if (theme === 'auto') {
-          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-        return theme;
+      toggleTheme: () => {
+        const newTheme = get().theme === 'light' ? 'dark' : 'light';
+        set({ theme: newTheme });
+        applyTheme(newTheme);
       },
     }),
     {
-      name: 'quantumlife-theme',
+      name: 'habit-app-theme',
     }
   )
 );
 
-function applyTheme(theme: 'dark' | 'light' | 'auto') {
+function applyTheme(theme: 'dark' | 'light') {
   const root = document.documentElement;
   
-  let effectiveTheme: 'dark' | 'light' = theme === 'auto'
-    ? window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    : theme;
-
-  if (effectiveTheme === 'dark') {
-    root.classList.remove('light-mode');
-    root.classList.add('dark-mode');
+  if (theme === 'dark') {
+    root.classList.add('dark');
   } else {
-    root.classList.remove('dark-mode');
-    root.classList.add('light-mode');
+    root.classList.remove('dark');
   }
 }
 
 // Initialize theme on load
 if (typeof window !== 'undefined') {
-  const stored = localStorage.getItem('quantumlife-theme');
+  const stored = localStorage.getItem('habit-app-theme');
   if (stored) {
     try {
       const { state } = JSON.parse(stored);
-      applyTheme(state.theme || 'dark');
+      applyTheme(state.theme || 'light');
     } catch (e) {
-      applyTheme('dark');
+      applyTheme('light');
     }
   } else {
-    applyTheme('dark');
+    applyTheme('light');
   }
-
-  // Listen for system theme changes when in auto mode
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-    const { theme } = useThemeStore.getState();
-    if (theme === 'auto') {
-      applyTheme('auto');
-    }
-  });
 }
