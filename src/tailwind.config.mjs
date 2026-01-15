@@ -19,12 +19,10 @@ export default {
             },
             colors: {
                 // Simple, friendly color system
-                primary: {
-                    DEFAULT: '#10b981', // Calm green
-                    hover: '#059669',
-                    light: '#d1fae5',
-                    dark: '#065f46',
-                },
+                primary: '#10b981', // Calm green - direct value for PostCSS compatibility
+                'primary-hover': '#059669',
+                'primary-light': '#d1fae5',
+                'primary-dark': '#065f46',
                 // Light mode colors
                 light: {
                     bg: '#f8f9fa',
