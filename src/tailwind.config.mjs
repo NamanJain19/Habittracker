@@ -32,6 +32,7 @@ export default {
                     text: '#1f2937',
                     'text-secondary': '#6b7280',
                     border: '#e5e7eb',
+                    foreground: '#1f2937',
                 },
                 // Dark mode colors
                 dark: {
@@ -40,6 +41,12 @@ export default {
                     text: '#f3f4f6',
                     'text-secondary': '#9ca3af',
                     border: '#404040',
+                    background: '#0a0a0a',
+                },
+                // Accent colors
+                accent: {
+                    teal: '#14b8a6',
+                    purple: '#a855f7',
                 },
                 // Semantic colors
                 success: '#10b981',
