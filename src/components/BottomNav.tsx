@@ -16,26 +16,31 @@ export default function BottomNav() {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-light-surface dark:bg-dark-surface border-t border-light-border dark:border-dark-border shadow-soft-lg">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-light-surface dark:bg-dark-surface border-t border-light-border dark:border-dark-border shadow-soft-lg pb-safe">
       <div className="max-w-[100rem] mx-auto px-2 sm:px-4">
-        <div className="flex items-center justify-around h-16 sm:h-20">
+        <div className="flex items-center justify-around h-16 sm:h-18">
           {navItems.map((item) => {
             const active = isActive(item.path);
             return (
               <Link
                 key={item.path}
                 to={item.path}
-                className="relative flex flex-col items-center justify-center flex-1 h-full group"
+                className="relative flex flex-col items-center justify-center flex-1 h-full group touch-manipulation"
               >
                 <motion.div
-                  whileTap={{ scale: 0.9 }}
-                  className={`flex flex-col items-center justify-center gap-1 transition-colors ${
+                  whileTap={{ scale: 0.92 }}
+                  className={`flex flex-col items-center justify-center gap-1 transition-all duration-200 ${
                     active
                       ? 'text-primary'
                       : 'text-light-text-secondary dark:text-dark-text-secondary hover:text-light-text dark:hover:text-dark-text'
                   }`}
                 >
-                  <item.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${active ? 'text-primary' : ''}`} />
+                  <motion.div
+                    animate={active ? { scale: [1, 1.1, 1] } : {}}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <item.icon className={`w-5 h-5 sm:w-6 sm:h-6 ${active ? 'text-primary' : ''}`} />
+                  </motion.div>
                   <span className={`text-xs sm:text-sm font-medium ${active ? 'text-primary' : ''}`}>
                     {item.label}
                   </span>

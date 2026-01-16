@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
-import { X, LayoutDashboard, CheckSquare, Target, TrendingUp, Activity, Heart, Users, Bell, Watch, Dumbbell, Settings } from 'lucide-react';
+import { X, LayoutDashboard, CheckSquare, Target, TrendingUp, Activity, Heart, Users, Bell, Watch, Dumbbell, Settings, User, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useMember } from '@/integrations';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -9,6 +10,7 @@ interface SidebarProps {
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const location = useLocation();
+  const { actions } = useMember();
 
   const trackerLinks = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -21,6 +23,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     { name: 'Reminders', href: '/reminders', icon: Bell },
     { name: 'Smart Fitness', href: '/tracker/smart-fitness', icon: Dumbbell },
     { name: 'Smartwatch', href: '/tracker/smartwatch', icon: Watch },
+    { name: 'Profile', href: '/profile', icon: User },
     { name: 'Settings', href: '/settings', icon: Settings },
   ];
 
@@ -89,6 +92,20 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   );
                 })}
               </ul>
+
+              {/* Logout Button */}
+              <div className="mt-6 pt-6 border-t border-light-border dark:border-dark-border">
+                <button
+                  onClick={() => {
+                    actions.logout();
+                    onClose();
+                  }}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg w-full text-light-text-secondary dark:text-dark-text-secondary hover:bg-error/10 hover:text-error transition-all"
+                >
+                  <LogOut className="w-5 h-5 flex-shrink-0" />
+                  <span>Logout</span>
+                </button>
+              </div>
             </nav>
           </motion.aside>
         )}

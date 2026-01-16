@@ -25,20 +25,17 @@ export default function ProfilePage() {
           >
             {/* Header */}
             <div className="space-y-2">
-              <h1 className="font-heading text-5xl lg:text-6xl font-bold">
-                <span className="text-light-foreground">Your</span>{' '}
-                <span className="bg-gradient-to-r from-accent-teal to-accent-purple bg-clip-text text-transparent">
-                  Profile
-                </span>
+              <h1 className="font-heading text-5xl lg:text-6xl font-bold text-light-text dark:text-dark-text">
+                Your Profile
               </h1>
-              <p className="font-paragraph text-lg text-light-foreground/70">
+              <p className="font-paragraph text-lg text-light-text-secondary dark:text-dark-text-secondary">
                 Manage your account information and preferences
               </p>
             </div>
 
             {/* Profile Card */}
             <div className="max-w-3xl">
-              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
+              <div className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-8 shadow-soft">
                 <div className="flex flex-col md:flex-row gap-8 items-start">
                   {/* Profile Picture */}
                   <div className="flex-shrink-0">
@@ -47,11 +44,11 @@ export default function ProfilePage() {
                         src={member.profile.photo.url}
                         alt={member.profile?.nickname || 'Profile'}
                         width={120}
-                        className="w-32 h-32 rounded-2xl object-cover border-2 border-accent-teal/30"
+                        className="w-32 h-32 rounded-2xl object-cover border-2 border-primary/30"
                       />
                     ) : (
-                      <div className="w-32 h-32 rounded-2xl bg-gradient-to-br from-accent-teal to-accent-purple flex items-center justify-center">
-                        <User className="w-16 h-16 text-black" />
+                      <div className="w-32 h-32 rounded-2xl bg-primary/10 flex items-center justify-center">
+                        <User className="w-16 h-16 text-primary" />
                       </div>
                     )}
                   </div>
@@ -59,11 +56,11 @@ export default function ProfilePage() {
                   {/* Profile Info */}
                   <div className="flex-1 space-y-6">
                     <div>
-                      <h2 className="font-heading text-3xl font-bold text-light-foreground mb-2">
+                      <h2 className="font-heading text-3xl font-bold text-light-text dark:text-dark-text mb-2">
                         {member?.profile?.nickname || member?.contact?.firstName || 'User'}
                       </h2>
                       {member?.profile?.title && (
-                        <p className="font-paragraph text-sm text-accent-teal">
+                        <p className="font-paragraph text-sm text-primary">
                           {member.profile.title}
                         </p>
                       )}
@@ -72,12 +69,12 @@ export default function ProfilePage() {
                     <div className="space-y-4">
                       {member?.loginEmail && (
                         <div className="flex items-center gap-3">
-                          <div className="p-2 rounded-lg bg-white/5 border border-white/10">
-                            <Mail className="w-5 h-5 text-accent-teal" />
+                          <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
+                            <Mail className="w-5 h-5 text-primary" />
                           </div>
                           <div>
-                            <div className="font-paragraph text-xs text-light-foreground/60">Email</div>
-                            <div className="font-paragraph text-sm text-light-foreground">
+                            <div className="font-paragraph text-xs text-light-text-secondary dark:text-dark-text-secondary">Email</div>
+                            <div className="font-paragraph text-sm text-light-text dark:text-dark-text">
                               {member.loginEmail}
                             </div>
                           </div>
@@ -86,12 +83,12 @@ export default function ProfilePage() {
 
                       {member?._createdDate && (
                         <div className="flex items-center gap-3">
-                          <div className="p-2 rounded-lg bg-white/5 border border-white/10">
-                            <Calendar className="w-5 h-5 text-accent-purple" />
+                          <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
+                            <Calendar className="w-5 h-5 text-primary" />
                           </div>
                           <div>
-                            <div className="font-paragraph text-xs text-light-foreground/60">Member Since</div>
-                            <div className="font-paragraph text-sm text-light-foreground">
+                            <div className="font-paragraph text-xs text-light-text-secondary dark:text-dark-text-secondary">Member Since</div>
+                            <div className="font-paragraph text-sm text-light-text dark:text-dark-text">
                               {new Date(member._createdDate).toLocaleDateString()}
                             </div>
                           </div>
@@ -99,12 +96,12 @@ export default function ProfilePage() {
                       )}
 
                       <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-lg bg-white/5 border border-white/10">
-                          <Award className="w-5 h-5 text-accent-teal" />
+                        <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
+                          <Award className="w-5 h-5 text-primary" />
                         </div>
                         <div>
-                          <div className="font-paragraph text-xs text-light-foreground/60">Status</div>
-                          <div className="font-paragraph text-sm text-light-foreground">
+                          <div className="font-paragraph text-xs text-light-text-secondary dark:text-dark-text-secondary">Status</div>
+                          <div className="font-paragraph text-sm text-light-text dark:text-dark-text">
                             {member?.status || 'Active'}
                           </div>
                         </div>
@@ -117,37 +114,37 @@ export default function ProfilePage() {
 
             {/* Additional Info */}
             <div className="max-w-3xl">
-              <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8">
-                <h3 className="font-heading text-2xl font-bold text-light-foreground mb-6">
+              <div className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-8 shadow-soft">
+                <h3 className="font-heading text-2xl font-bold text-light-text dark:text-dark-text mb-6">
                   Account Details
                 </h3>
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <div className="font-paragraph text-sm text-light-foreground/60 mb-1">First Name</div>
-                    <div className="font-paragraph text-base text-light-foreground">
+                    <div className="font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary mb-1">First Name</div>
+                    <div className="font-paragraph text-base text-light-text dark:text-dark-text">
                       {member?.contact?.firstName || 'Not set'}
                     </div>
                   </div>
                   <div>
-                    <div className="font-paragraph text-sm text-light-foreground/60 mb-1">Last Name</div>
-                    <div className="font-paragraph text-base text-light-foreground">
+                    <div className="font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary mb-1">Last Name</div>
+                    <div className="font-paragraph text-base text-light-text dark:text-dark-text">
                       {member?.contact?.lastName || 'Not set'}
                     </div>
                   </div>
                   <div>
-                    <div className="font-paragraph text-sm text-light-foreground/60 mb-1">Email Verified</div>
-                    <div className="font-paragraph text-base text-light-foreground">
+                    <div className="font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary mb-1">Email Verified</div>
+                    <div className="font-paragraph text-base text-light-text dark:text-dark-text">
                       {member?.loginEmailVerified ? (
-                        <span className="text-accent-teal">✓ Verified</span>
+                        <span className="text-success">✓ Verified</span>
                       ) : (
-                        <span className="text-light-foreground/60">Not verified</span>
+                        <span className="text-light-text-secondary dark:text-dark-text-secondary">Not verified</span>
                       )}
                     </div>
                   </div>
                   {member?.lastLoginDate && (
                     <div>
-                      <div className="font-paragraph text-sm text-light-foreground/60 mb-1">Last Login</div>
-                      <div className="font-paragraph text-base text-light-foreground">
+                      <div className="font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary mb-1">Last Login</div>
+                      <div className="font-paragraph text-base text-light-text dark:text-dark-text">
                         {new Date(member.lastLoginDate).toLocaleDateString()}
                       </div>
                     </div>
