@@ -51,8 +51,6 @@ export default function DashboardPage() {
       title: 'Habits',
       icon: CheckCircle2,
       count: habits.length,
-      color: 'from-accent-teal/20 to-accent-teal/10',
-      borderColor: 'border-accent-teal/30',
       textColor: 'text-accent-teal',
       link: '/habits',
     },
@@ -60,8 +58,6 @@ export default function DashboardPage() {
       title: 'Goals',
       icon: Target,
       count: goals.length,
-      color: 'from-accent-purple/20 to-accent-purple/10',
-      borderColor: 'border-accent-purple/30',
       textColor: 'text-accent-purple',
       link: '/goals',
     },
@@ -69,8 +65,6 @@ export default function DashboardPage() {
       title: 'Productivity',
       icon: TrendingUp,
       count: productivityLogs.length,
-      color: 'from-accent-teal/20 to-accent-purple/20',
-      borderColor: 'border-accent-teal/30',
       textColor: 'text-accent-teal',
       link: '/productivity',
     },
@@ -78,8 +72,6 @@ export default function DashboardPage() {
       title: 'Fitness',
       icon: Zap,
       count: fitnessActivities.length,
-      color: 'from-accent-purple/20 to-accent-teal/20',
-      borderColor: 'border-accent-purple/30',
       textColor: 'text-accent-purple',
       link: '/fitness',
     },
@@ -87,8 +79,6 @@ export default function DashboardPage() {
       title: 'Wellness',
       icon: Heart,
       count: wellnessCheckins.length,
-      color: 'from-accent-teal/20 to-accent-teal/10',
-      borderColor: 'border-accent-teal/30',
       textColor: 'text-accent-teal',
       link: '/wellness',
     },
@@ -96,10 +86,16 @@ export default function DashboardPage() {
       title: 'Reminders',
       icon: Calendar,
       count: reminders.filter(r => r.isActive).length,
-      color: 'from-accent-purple/20 to-accent-purple/10',
-      borderColor: 'border-accent-purple/30',
       textColor: 'text-accent-purple',
       link: '/reminders',
+    },
+    {
+      title: 'Smartwatch',
+      icon: Activity,
+      count: 0,
+      textColor: 'text-primary',
+      link: '/tracker/smartwatch',
+      status: 'Not Connected',
     },
   ];
 
@@ -212,7 +208,11 @@ export default function DashboardPage() {
                     <Link to={card.link}>
                       <div className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-6 hover:scale-105 hover:shadow-soft-lg transition-all group">
                         <div className="flex items-center justify-between mb-4">
-                          <div className={`p-3 rounded-xl ${card.textColor === 'text-accent-teal' ? 'bg-accent-teal/10' : 'bg-accent-purple/10'}`}>
+                          <div className={`p-3 rounded-xl ${
+                            card.textColor === 'text-primary' ? 'bg-primary/10' : 
+                            card.textColor === 'text-accent-teal' ? 'bg-accent-teal/10' : 
+                            'bg-accent-purple/10'
+                          }`}>
                             <card.icon className={`w-6 h-6 ${card.textColor}`} />
                           </div>
                           <div className={`text-4xl font-bold ${card.textColor}`}>
@@ -223,7 +223,7 @@ export default function DashboardPage() {
                           {card.title}
                         </h3>
                         <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
-                          View and manage your {card.title.toLowerCase()}
+                          {card.status || `View and manage your ${card.title.toLowerCase()}`}
                         </p>
                       </div>
                     </Link>
