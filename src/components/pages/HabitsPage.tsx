@@ -120,7 +120,7 @@ export default function HabitsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-background text-light-foreground">
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
       <Header />
       
       <main className="pt-24 pb-16 px-6 lg:px-8">
@@ -132,13 +132,13 @@ export default function HabitsPage() {
               animate={{ opacity: 1, y: 0 }}
               className="space-y-2"
             >
-              <h1 className="font-heading text-5xl lg:text-6xl font-bold">
-                <span className="text-light-foreground">Habit</span>{' '}
-                <span className="bg-gradient-to-r from-accent-teal to-accent-purple bg-clip-text text-transparent">
+              <h1 className="text-5xl lg:text-6xl font-bold">
+                <span className="text-light-text dark:text-dark-text">Habit</span>{' '}
+                <span className="text-primary">
                   Tracker
                 </span>
               </h1>
-              <p className="font-paragraph text-lg text-light-foreground/70">
+              <p className="text-lg text-light-text-secondary dark:text-dark-text-secondary">
                 Build lasting habits and track your daily progress
               </p>
             </motion.div>
@@ -148,40 +148,40 @@ export default function HabitsPage() {
               if (!open) resetForm();
             }}>
               <DialogTrigger asChild>
-                <Button className="bg-gradient-to-br from-accent-teal to-accent-purple text-black font-bold py-3 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 font-paragraph">
+                <Button className="bg-primary text-white hover:bg-primary-hover font-bold py-3 px-6 rounded-lg shadow-soft hover:shadow-soft-hover transition-all">
                   <Plus className="w-5 h-5 mr-2" />
                   Add Habit
                 </Button>
               </DialogTrigger>
-              <DialogContent className="bg-dark-background border-white/10">
+              <DialogContent className="bg-light-surface dark:bg-dark-surface border-light-border dark:border-dark-border">
                 <DialogHeader>
-                  <DialogTitle className="font-heading text-2xl text-light-foreground">
+                  <DialogTitle className="text-2xl text-light-text dark:text-dark-text">
                     {editingHabit ? 'Edit Habit' : 'Create New Habit'}
                   </DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <Label htmlFor="habitName" className="font-paragraph text-light-foreground">Habit Name</Label>
+                    <Label htmlFor="habitName" className="text-light-text dark:text-dark-text">Habit Name</Label>
                     <Input
                       id="habitName"
                       value={formData.habitName}
                       onChange={(e) => setFormData({ ...formData, habitName: e.target.value })}
                       required
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="frequency" className="font-paragraph text-light-foreground">Frequency</Label>
+                    <Label htmlFor="frequency" className="text-light-text dark:text-dark-text">Frequency</Label>
                     <Input
                       id="frequency"
                       value={formData.frequency}
                       onChange={(e) => setFormData({ ...formData, frequency: e.target.value })}
                       placeholder="e.g., Daily, Weekly"
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text"
                     />
                   </div>
                   <div className="flex items-center justify-between">
-                    <Label htmlFor="isCompleted" className="font-paragraph text-light-foreground">Completed Today</Label>
+                    <Label htmlFor="isCompleted" className="text-light-text dark:text-dark-text">Completed Today</Label>
                     <Switch
                       id="isCompleted"
                       checked={formData.isCompleted}
@@ -190,7 +190,7 @@ export default function HabitsPage() {
                   </div>
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-br from-accent-teal to-accent-purple text-black font-bold py-3 rounded-lg font-paragraph"
+                    className="w-full bg-primary text-white hover:bg-primary-hover font-bold py-3 rounded-lg"
                   >
                     {editingHabit ? 'Update Habit' : 'Create Habit'}
                   </Button>
@@ -209,7 +209,7 @@ export default function HabitsPage() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-accent-teal/30 transition-all duration-300 group"
+                    className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-6 hover:shadow-soft-lg transition-all group"
                   >
                     {habit.habitImage && (
                       <div className="mb-4 rounded-xl overflow-hidden">
@@ -224,19 +224,19 @@ export default function HabitsPage() {
                     
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
-                        <h3 className="font-heading text-xl font-bold text-light-foreground mb-1">
+                        <h3 className="text-xl font-bold text-light-text dark:text-dark-text mb-1">
                           {habit.habitName}
                         </h3>
-                        <p className="font-paragraph text-sm text-light-foreground/60">
+                        <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
                           {habit.frequency}
                         </p>
                       </div>
                       <button
                         onClick={() => toggleComplete(habit)}
-                        className={`p-2 rounded-lg transition-all duration-300 ${
+                        className={`p-2 rounded-lg transition-all ${
                           habit.isCompleted
-                            ? 'bg-accent-teal/20 text-accent-teal'
-                            : 'bg-white/5 text-light-foreground/30 hover:bg-white/10'
+                            ? 'bg-primary/20 text-primary'
+                            : 'bg-light-bg dark:bg-dark-bg text-light-text-secondary dark:text-dark-text-secondary hover:bg-light-border dark:hover:bg-dark-border'
                         }`}
                       >
                         <CheckCircle2 className="w-6 h-6" />
@@ -244,23 +244,23 @@ export default function HabitsPage() {
                     </div>
 
                     <div className="flex items-center gap-2 mb-4">
-                      <Flame className="w-5 h-5 text-accent-purple" />
-                      <span className="font-paragraph text-sm text-light-foreground">
-                        <span className="font-bold text-accent-purple">{habit.streakCount || 0}</span> day streak
+                      <Flame className="w-5 h-5 text-accent-teal" />
+                      <span className="text-sm text-light-text dark:text-dark-text">
+                        <span className="font-bold text-accent-teal">{habit.streakCount || 0}</span> day streak
                       </span>
                     </div>
 
                     <div className="flex gap-2">
                       <Button
                         onClick={() => openEditDialog(habit)}
-                        className="flex-1 bg-white/5 text-accent-teal border border-accent-teal/30 hover:bg-accent-teal/10 font-paragraph text-sm"
+                        className="flex-1 bg-transparent text-primary border border-primary/30 hover:bg-primary/10 text-sm"
                       >
                         <Edit2 className="w-4 h-4 mr-2" />
                         Edit
                       </Button>
                       <Button
                         onClick={() => handleDelete(habit._id)}
-                        className="flex-1 bg-white/5 text-destructive border border-destructive/30 hover:bg-destructive/10 font-paragraph text-sm"
+                        className="flex-1 bg-transparent text-error border border-error/30 hover:bg-error/10 text-sm"
                       >
                         <Trash2 className="w-4 h-4 mr-2" />
                         Delete
@@ -275,11 +275,11 @@ export default function HabitsPage() {
                 animate={{ opacity: 1 }}
                 className="text-center py-20"
               >
-                <CheckCircle2 className="w-16 h-16 text-light-foreground/30 mx-auto mb-4" />
-                <h3 className="font-heading text-2xl font-bold text-light-foreground mb-2">
+                <CheckCircle2 className="w-16 h-16 text-light-text-secondary dark:text-dark-text-secondary mx-auto mb-4" />
+                <h3 className="text-2xl font-bold text-light-text dark:text-dark-text mb-2">
                   No habits yet
                 </h3>
-                <p className="font-paragraph text-light-foreground/60 mb-6">
+                <p className="text-light-text-secondary dark:text-dark-text-secondary mb-6">
                   Start building better habits by creating your first one
                 </p>
               </motion.div>

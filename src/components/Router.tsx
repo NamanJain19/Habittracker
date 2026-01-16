@@ -20,6 +20,7 @@ import PrivacyPage from '@/components/pages/PrivacyPage';
 import TermsPage from '@/components/pages/TermsPage';
 import ContactPage from '@/components/pages/ContactPage';
 import SmartFitnessPage from '@/components/pages/SmartFitnessPage';
+import SmartwatchPage from '@/components/pages/SmartwatchPage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -198,6 +199,17 @@ const router = createBrowserRouter([
         ),
         routeMetadata: {
           pageIdentifier: 'smart-fitness',
+        },
+      },
+      {
+        path: "tracker/smartwatch",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to access Smartwatch Integration">
+            <SmartwatchPage />
+          </MemberProtectedRoute>
+        ),
+        routeMetadata: {
+          pageIdentifier: 'smartwatch',
         },
       },
       {
