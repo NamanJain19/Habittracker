@@ -3,10 +3,12 @@ import { motion } from 'framer-motion';
 import { Watch, Smartphone, Watch as WatchIcon } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Sidebar from '@/components/Sidebar';
 import { Button } from '@/components/ui/button';
 
 export default function SmartwatchPage() {
   const [connectionStatus, setConnectionStatus] = useState<'not-connected' | 'coming-soon'>('not-connected');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleConnect = () => {
     setConnectionStatus('coming-soon');
@@ -20,7 +22,8 @@ export default function SmartwatchPage() {
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
-      <Header />
+      <Header onMenuClick={() => setSidebarOpen(true)} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <main className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto">

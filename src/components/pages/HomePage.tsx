@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Target, TrendingUp, Heart, Users, Calendar, Activity, CheckCircle, ArrowRight } from 'lucide-react';
@@ -5,9 +6,11 @@ import { Button } from '@/components/ui/button';
 import { useMember } from '@/integrations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Sidebar from '@/components/Sidebar';
 
 export default function HomePage() {
   const { isAuthenticated } = useMember();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const features = [
     {
@@ -53,7 +56,8 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
-      <Header />
+      <Header onMenuClick={() => setSidebarOpen(true)} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* Hero Section */}
       <section className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">

@@ -5,6 +5,7 @@ import { BaseCrudService } from '@/integrations';
 import { Habits } from '@/entities';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Sidebar from '@/components/Sidebar';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -14,6 +15,7 @@ import { Image } from '@/components/ui/image';
 
 export default function HabitsPage() {
   const [isLoading, setIsLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [habits, setHabits] = useState<Habits[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingHabit, setEditingHabit] = useState<Habits | null>(null);
@@ -121,7 +123,8 @@ export default function HabitsPage() {
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
-      <Header />
+      <Header onMenuClick={() => setSidebarOpen(true)} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
       <main className="pt-24 pb-16 px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto space-y-8">

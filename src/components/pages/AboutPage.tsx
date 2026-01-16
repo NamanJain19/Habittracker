@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Target, Users, Zap, Heart, Shield, TrendingUp } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Sidebar from '@/components/Sidebar';
 import { Image } from '@/components/ui/image';
 
 export default function AboutPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const values = [
     {
       icon: Target,
@@ -40,7 +43,8 @@ export default function AboutPage() {
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
-      <Header />
+      <Header onMenuClick={() => setSidebarOpen(true)} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
       <main className="pt-24 pb-16">
         {/* Hero Section */}

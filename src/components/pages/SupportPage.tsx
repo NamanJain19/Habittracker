@@ -1,13 +1,16 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { HelpCircle, Mail, MessageSquare, Book, Video, FileText } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Sidebar from '@/components/Sidebar';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 
 export default function SupportPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const resources = [
     {
       icon: Book,
@@ -59,8 +62,9 @@ export default function SupportPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-dark-background text-light-foreground">
-      <Header />
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
+      <Header onMenuClick={() => setSidebarOpen(true)} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
       <main className="pt-24 pb-16">
         {/* Hero Section */}

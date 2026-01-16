@@ -68,8 +68,9 @@ export default function TermsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-dark-background text-light-foreground">
-      <Header />
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
+      <Header onMenuClick={() => setSidebarOpen(true)} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
       <main className="pt-24 pb-16">
         {/* Hero Section */}

@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Lock, Eye, Database, UserCheck, FileText } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Sidebar from '@/components/Sidebar';
 
 export default function PrivacyPage() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const sections = [
     {
       icon: Database,
@@ -74,8 +77,9 @@ export default function PrivacyPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-dark-background text-light-foreground">
-      <Header />
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
+      <Header onMenuClick={() => setSidebarOpen(true)} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
       <main className="pt-24 pb-16">
         {/* Hero Section */}

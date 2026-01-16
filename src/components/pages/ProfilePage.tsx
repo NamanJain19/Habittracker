@@ -1,16 +1,20 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { User, Mail, Calendar, Award } from 'lucide-react';
 import { useMember } from '@/integrations';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Sidebar from '@/components/Sidebar';
 import { Image } from '@/components/ui/image';
 
 export default function ProfilePage() {
   const { member } = useMember();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-dark-background text-light-foreground">
-      <Header />
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
+      <Header onMenuClick={() => setSidebarOpen(true)} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
       <main className="pt-24 pb-16 px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto">

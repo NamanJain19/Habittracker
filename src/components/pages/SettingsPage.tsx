@@ -6,6 +6,7 @@ import { UserSettings } from '@/entities';
 import { useThemeStore } from '@/lib/theme-store';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Sidebar from '@/components/Sidebar';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
@@ -14,6 +15,7 @@ import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 export default function SettingsPage() {
   const [isLoading, setIsLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [settings, setSettings] = useState<UserSettings | null>(null);
@@ -96,8 +98,9 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
-      <Header />
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
+      <Header onMenuClick={() => setSidebarOpen(true)} />
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
       
       <main className="pt-24 pb-16 px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto">
