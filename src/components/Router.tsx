@@ -19,6 +19,7 @@ import SupportPage from '@/components/pages/SupportPage';
 import PrivacyPage from '@/components/pages/PrivacyPage';
 import TermsPage from '@/components/pages/TermsPage';
 import ContactPage from '@/components/pages/ContactPage';
+import SmartFitnessPage from '@/components/pages/SmartFitnessPage';
 
 // Layout component that includes ScrollToTop
 function Layout() {
@@ -186,6 +187,17 @@ const router = createBrowserRouter([
         element: <ContactPage />,
         routeMetadata: {
           pageIdentifier: 'contact',
+        },
+      },
+      {
+        path: "tracker/smart-fitness",
+        element: (
+          <MemberProtectedRoute messageToSignIn="Sign in to access Smart Fitness & Body Analysis">
+            <SmartFitnessPage />
+          </MemberProtectedRoute>
+        ),
+        routeMetadata: {
+          pageIdentifier: 'smart-fitness',
         },
       },
       {

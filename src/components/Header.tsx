@@ -20,6 +20,7 @@ export default function Header() {
     { name: 'Wellness', href: '/wellness' },
     { name: 'Community', href: '/community' },
     { name: 'Reminders', href: '/reminders' },
+    { name: 'Smart Fitness', href: '/tracker/smart-fitness' },
   ];
 
   const isActive = (path: string) => location.pathname === path;

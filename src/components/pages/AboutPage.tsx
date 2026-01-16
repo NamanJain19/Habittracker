@@ -39,7 +39,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-dark-background text-light-foreground">
+    <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
       <Header />
       
       <main className="pt-24 pb-16">
@@ -51,13 +51,13 @@ export default function AboutPage() {
               animate={{ opacity: 1, y: 0 }}
               className="text-center space-y-6 max-w-4xl mx-auto"
             >
-              <h1 className="font-heading text-5xl lg:text-7xl font-bold">
-                <span className="text-light-foreground">About</span>{' '}
+              <h1 className="text-5xl lg:text-7xl font-bold">
+                <span className="text-light-text dark:text-dark-text">About</span>{' '}
                 <span className="bg-gradient-to-r from-accent-teal to-accent-purple bg-clip-text text-transparent">
-                  Quantum Life
+                  HabitFlow
                 </span>
               </h1>
-              <p className="font-paragraph text-xl text-light-foreground/70 leading-relaxed">
+              <p className="text-xl text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
                 We're building the future of personal optimization - a comprehensive platform that transforms 
                 how you track, analyze, and improve every aspect of your life.
               </p>
@@ -66,7 +66,7 @@ export default function AboutPage() {
         </section>
 
         {/* Story Section */}
-        <section className="px-6 lg:px-8 py-20 bg-white/5 border-y border-white/10">
+        <section className="px-6 lg:px-8 py-20 bg-light-surface dark:bg-dark-surface border-y border-light-border dark:border-dark-border">
           <div className="max-w-[100rem] mx-auto">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               <motion.div
@@ -75,12 +75,12 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 className="space-y-6"
               >
-                <h2 className="font-heading text-4xl lg:text-5xl font-bold text-light-foreground">
+                <h2 className="text-4xl lg:text-5xl font-bold text-light-text dark:text-dark-text">
                   Our Story
                 </h2>
-                <div className="space-y-4 font-paragraph text-lg text-light-foreground/70 leading-relaxed">
+                <div className="space-y-4 text-lg text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
                   <p>
-                    Quantum Life was born from a simple observation: people want to improve their lives, 
+                    HabitFlow was born from a simple observation: people want to improve their lives, 
                     but traditional tracking methods are fragmented, tedious, and lack actionable insights.
                   </p>
                   <p>
@@ -90,7 +90,7 @@ export default function AboutPage() {
                     meaningful progress toward your aspirations.
                   </p>
                   <p>
-                    Today, Quantum Life serves thousands of users worldwide, helping them optimize their 
+                    Today, HabitFlow serves thousands of users worldwide, helping them optimize their 
                     daily routines, achieve their goals, and live healthier, more fulfilling lives.
                   </p>
                 </div>
@@ -102,10 +102,10 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 className="relative"
               >
-                <div className="aspect-square rounded-2xl overflow-hidden border border-white/10">
+                <div className="aspect-square rounded-2xl overflow-hidden border border-light-border dark:border-dark-border">
                   <Image
                     src="https://static.wixstatic.com/media/0c8865_c784368812ba49d28b8059109a6ba320~mv2.png?originWidth=576&originHeight=576"
-                    alt="Quantum Life Platform"
+                    alt="HabitFlow Platform"
                     width={600}
                     className="w-full h-full object-cover"
                   />
@@ -125,10 +125,10 @@ export default function AboutPage() {
               viewport={{ once: true }}
               className="text-center space-y-4 mb-16"
             >
-              <h2 className="font-heading text-4xl lg:text-5xl font-bold text-light-foreground">
+              <h2 className="text-4xl lg:text-5xl font-bold text-light-text dark:text-dark-text">
                 Our Values
               </h2>
-              <p className="font-paragraph text-lg text-light-foreground/70 max-w-2xl mx-auto">
+              <p className="text-lg text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto">
                 The principles that guide everything we do
               </p>
             </motion.div>
@@ -141,15 +141,15 @@ export default function AboutPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 hover:border-accent-teal/30 transition-all duration-300"
+                  className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-8 hover:shadow-soft-hover transition-all duration-300"
                 >
                   <div className="p-3 rounded-xl bg-gradient-to-br from-accent-teal/20 to-accent-purple/20 border border-accent-teal/30 w-fit mb-6">
                     <value.icon className="w-8 h-8 text-accent-teal" />
                   </div>
-                  <h3 className="font-heading text-2xl font-bold text-light-foreground mb-3">
+                  <h3 className="text-2xl font-bold text-light-text dark:text-dark-text mb-3">
                     {value.title}
                   </h3>
-                  <p className="font-paragraph text-light-foreground/70 leading-relaxed">
+                  <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
                     {value.description}
                   </p>
                 </motion.div>
@@ -159,7 +159,7 @@ export default function AboutPage() {
         </section>
 
         {/* Stats Section */}
-        <section className="px-6 lg:px-8 py-20 bg-white/5 border-y border-white/10">
+        <section className="px-6 lg:px-8 py-20 bg-light-surface dark:bg-dark-surface border-y border-light-border dark:border-dark-border">
           <div className="max-w-[100rem] mx-auto">
             <div className="grid md:grid-cols-4 gap-8">
               {[
@@ -176,10 +176,10 @@ export default function AboutPage() {
                   transition={{ delay: index * 0.1 }}
                   className="text-center space-y-2"
                 >
-                  <div className="font-heading text-5xl lg:text-6xl font-bold bg-gradient-to-r from-accent-teal to-accent-purple bg-clip-text text-transparent">
+                  <div className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-accent-teal to-accent-purple bg-clip-text text-transparent">
                     {stat.value}
                   </div>
-                  <div className="font-paragraph text-light-foreground/70">
+                  <div className="text-light-text-secondary dark:text-dark-text-secondary">
                     {stat.label}
                   </div>
                 </motion.div>
