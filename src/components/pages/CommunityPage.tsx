@@ -5,7 +5,7 @@ import { BaseCrudService } from '@/integrations';
 import { CommunityPosts } from '@/entities';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Sidebar from '@/components/Sidebar';
+import BottomNav from '@/components/BottomNav';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -15,7 +15,6 @@ import { Image } from '@/components/ui/image';
 
 export default function CommunityPage() {
   const [isLoading, setIsLoading] = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [posts, setPosts] = useState<CommunityPosts[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -88,10 +87,9 @@ export default function CommunityPage() {
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
-      <Header onMenuClick={() => setSidebarOpen(true)} />
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <Header />
       
-      <main className="pt-24 pb-16 px-6 lg:px-8">
+      <main className="pt-24 pb-32 px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto space-y-8">
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -101,12 +99,12 @@ export default function CommunityPage() {
               className="space-y-2"
             >
               <h1 className="font-heading text-5xl lg:text-6xl font-bold">
-                <span className="text-light-foreground">Community</span>{' '}
+                <span className="text-light-text dark:text-dark-text">Community</span>{' '}
                 <span className="bg-gradient-to-r from-accent-teal to-accent-purple bg-clip-text text-transparent">
                   Hub
                 </span>
               </h1>
-              <p className="font-paragraph text-lg text-light-foreground/70">
+              <p className="font-paragraph text-lg text-light-text-secondary dark:text-dark-text-secondary">
                 Share your journey and connect with others
               </p>
             </motion.div>
@@ -121,32 +119,32 @@ export default function CommunityPage() {
                   Create Post
                 </Button>
               </DialogTrigger>
-              <DialogContent className="bg-dark-background border-white/10">
+              <DialogContent className="bg-light-surface dark:bg-dark-surface border-light-border dark:border-dark-border">
                 <DialogHeader>
-                  <DialogTitle className="font-heading text-2xl text-light-foreground">
+                  <DialogTitle className="font-heading text-2xl text-light-text dark:text-dark-text">
                     Share Your Achievement
                   </DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <Label htmlFor="authorDisplayName" className="font-paragraph text-light-foreground">Your Name</Label>
+                    <Label htmlFor="authorDisplayName" className="font-paragraph text-light-text dark:text-dark-text">Your Name</Label>
                     <Input
                       id="authorDisplayName"
                       value={formData.authorDisplayName}
                       onChange={(e) => setFormData({ ...formData, authorDisplayName: e.target.value })}
                       required
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-paragraph"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="postContent" className="font-paragraph text-light-foreground">Post Content</Label>
+                    <Label htmlFor="postContent" className="font-paragraph text-light-text dark:text-dark-text">Post Content</Label>
                     <Textarea
                       id="postContent"
                       value={formData.postContent}
                       onChange={(e) => setFormData({ ...formData, postContent: e.target.value })}
                       placeholder="Share your progress, achievements, or insights..."
                       required
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph min-h-[120px]"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-paragraph min-h-[120px]"
                     />
                   </div>
                   <Button
@@ -170,7 +168,7 @@ export default function CommunityPage() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-accent-teal/30 transition-all duration-300"
+                    className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-6 hover:border-accent-teal/30 transition-all duration-300"
                   >
                     {/* Author Info */}
                     <div className="flex items-center gap-3 mb-4">
@@ -178,11 +176,11 @@ export default function CommunityPage() {
                         {post.authorDisplayName?.charAt(0).toUpperCase() || 'U'}
                       </div>
                       <div>
-                        <div className="font-heading text-sm font-bold text-light-foreground">
+                        <div className="font-heading text-sm font-bold text-light-text dark:text-dark-text">
                           {post.authorDisplayName}
                         </div>
                         {post.timestamp && (
-                          <div className="font-paragraph text-xs text-light-foreground/60">
+                          <div className="font-paragraph text-xs text-light-text-secondary dark:text-dark-text-secondary">
                             {new Date(post.timestamp).toLocaleString()}
                           </div>
                         )}
@@ -190,7 +188,7 @@ export default function CommunityPage() {
                     </div>
 
                     {/* Post Content */}
-                    <p className="font-paragraph text-base text-light-foreground/90 mb-4 leading-relaxed">
+                    <p className="font-paragraph text-base text-light-text dark:text-dark-text mb-4 leading-relaxed">
                       {post.postContent}
                     </p>
 
@@ -207,15 +205,15 @@ export default function CommunityPage() {
                     )}
 
                     {/* Engagement */}
-                    <div className="flex items-center gap-6 pt-4 border-t border-white/10">
+                    <div className="flex items-center gap-6 pt-4 border-t border-light-border dark:border-dark-border">
                       <button
                         onClick={() => handleLike(post)}
-                        className="flex items-center gap-2 font-paragraph text-sm text-light-foreground/70 hover:text-accent-teal transition-colors"
+                        className="flex items-center gap-2 font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary hover:text-accent-teal transition-colors"
                       >
                         <Heart className="w-5 h-5" />
                         <span>{post.likeCount || 0}</span>
                       </button>
-                      <div className="flex items-center gap-2 font-paragraph text-sm text-light-foreground/70">
+                      <div className="flex items-center gap-2 font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary">
                         <MessageCircle className="w-5 h-5" />
                         <span>{post.commentCount || 0}</span>
                       </div>
@@ -229,11 +227,11 @@ export default function CommunityPage() {
                 animate={{ opacity: 1 }}
                 className="text-center py-20"
               >
-                <Users className="w-16 h-16 text-light-foreground/30 mx-auto mb-4" />
-                <h3 className="font-heading text-2xl font-bold text-light-foreground mb-2">
+                <Users className="w-16 h-16 text-light-text-secondary dark:text-dark-text-secondary mx-auto mb-4" />
+                <h3 className="font-heading text-2xl font-bold text-light-text dark:text-dark-text mb-2">
                   No posts yet
                 </h3>
-                <p className="font-paragraph text-light-foreground/60 mb-6">
+                <p className="font-paragraph text-light-text-secondary dark:text-dark-text-secondary mb-6">
                   Be the first to share your journey with the community
                 </p>
               </motion.div>
@@ -242,6 +240,7 @@ export default function CommunityPage() {
         </div>
       </main>
 
+      <BottomNav />
       <Footer />
     </div>
   );

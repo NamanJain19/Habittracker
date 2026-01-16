@@ -6,12 +6,11 @@ import { BaseCrudService } from '@/integrations';
 import { Habits, Goals, FitnessActivities, WellnessCheckins, ProductivityLogs, Reminders } from '@/entities';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Sidebar from '@/components/Sidebar';
+import BottomNav from '@/components/BottomNav';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 export default function DashboardPage() {
   const [isLoading, setIsLoading] = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [habits, setHabits] = useState<Habits[]>([]);
   const [goals, setGoals] = useState<Goals[]>([]);
   const [fitnessActivities, setFitnessActivities] = useState<FitnessActivities[]>([]);
@@ -109,10 +108,9 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
-      <Header onMenuClick={() => setSidebarOpen(true)} />
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <Header />
       
-      <main className="pt-24 pb-16 px-6 lg:px-8">
+      <main className="pt-24 pb-32 px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto space-y-12">
           {/* Header */}
           <motion.div
@@ -308,6 +306,7 @@ export default function DashboardPage() {
         </div>
       </main>
 
+      <BottomNav />
       <Footer />
     </div>
   );

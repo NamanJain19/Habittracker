@@ -5,7 +5,7 @@ import { BaseCrudService } from '@/integrations';
 import { FitnessActivities } from '@/entities';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Sidebar from '@/components/Sidebar';
+import BottomNav from '@/components/BottomNav';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -14,7 +14,6 @@ import { Textarea } from '@/components/ui/textarea';
 
 export default function FitnessPage() {
   const [isLoading, setIsLoading] = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activities, setActivities] = useState<FitnessActivities[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingActivity, setEditingActivity] = useState<FitnessActivities | null>(null);
@@ -104,10 +103,9 @@ export default function FitnessPage() {
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
-      <Header onMenuClick={() => setSidebarOpen(true)} />
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <Header />
       
-      <main className="pt-24 pb-16 px-6 lg:px-8">
+      <main className="pt-24 pb-32 px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto space-y-8">
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -117,12 +115,12 @@ export default function FitnessPage() {
               className="space-y-2"
             >
               <h1 className="font-heading text-5xl lg:text-6xl font-bold">
-                <span className="text-light-foreground">Fitness</span>{' '}
+                <span className="text-light-text dark:text-dark-text">Fitness</span>{' '}
                 <span className="bg-gradient-to-r from-accent-teal to-accent-purple bg-clip-text text-transparent">
                   Tracker
                 </span>
               </h1>
-              <p className="font-paragraph text-lg text-light-foreground/70">
+              <p className="font-paragraph text-lg text-light-text-secondary dark:text-dark-text-secondary">
                 Monitor your physical activities and performance
               </p>
             </motion.div>
@@ -137,63 +135,63 @@ export default function FitnessPage() {
                   Add Activity
                 </Button>
               </DialogTrigger>
-              <DialogContent className="bg-dark-background border-white/10">
+              <DialogContent className="bg-light-surface dark:bg-dark-surface border-light-border dark:border-dark-border">
                 <DialogHeader>
-                  <DialogTitle className="font-heading text-2xl text-light-foreground">
+                  <DialogTitle className="font-heading text-2xl text-light-text dark:text-dark-text">
                     {editingActivity ? 'Edit Activity' : 'Log New Activity'}
                   </DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <Label htmlFor="activityType" className="font-paragraph text-light-foreground">Activity Type</Label>
+                    <Label htmlFor="activityType" className="font-paragraph text-light-text dark:text-dark-text">Activity Type</Label>
                     <Input
                       id="activityType"
                       value={formData.activityType}
                       onChange={(e) => setFormData({ ...formData, activityType: e.target.value })}
                       placeholder="e.g., Running, Cycling, Gym"
                       required
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-paragraph"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="duration" className="font-paragraph text-light-foreground">Duration (minutes)</Label>
+                    <Label htmlFor="duration" className="font-paragraph text-light-text dark:text-dark-text">Duration (minutes)</Label>
                     <Input
                       id="duration"
                       type="number"
                       min="0"
                       value={formData.duration}
                       onChange={(e) => setFormData({ ...formData, duration: Number(e.target.value) })}
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-paragraph"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="caloriesBurned" className="font-paragraph text-light-foreground">Calories Burned</Label>
+                    <Label htmlFor="caloriesBurned" className="font-paragraph text-light-text dark:text-dark-text">Calories Burned</Label>
                     <Input
                       id="caloriesBurned"
                       type="number"
                       min="0"
                       value={formData.caloriesBurned}
                       onChange={(e) => setFormData({ ...formData, caloriesBurned: Number(e.target.value) })}
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-paragraph"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="activityDate" className="font-paragraph text-light-foreground">Date</Label>
+                    <Label htmlFor="activityDate" className="font-paragraph text-light-text dark:text-dark-text">Date</Label>
                     <Input
                       id="activityDate"
                       type="date"
                       value={formData.activityDate}
                       onChange={(e) => setFormData({ ...formData, activityDate: e.target.value })}
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-paragraph"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="performanceNotes" className="font-paragraph text-light-foreground">Performance Notes</Label>
+                    <Label htmlFor="performanceNotes" className="font-paragraph text-light-text dark:text-dark-text">Performance Notes</Label>
                     <Textarea
                       id="performanceNotes"
                       value={formData.performanceNotes}
                       onChange={(e) => setFormData({ ...formData, performanceNotes: e.target.value })}
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-paragraph"
                     />
                   </div>
                   <Button
@@ -212,27 +210,27 @@ export default function FitnessPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6"
+              className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-6"
             >
-              <div className="font-paragraph text-sm text-light-foreground/60 mb-2">Total Activities</div>
+              <div className="font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary mb-2">Total Activities</div>
               <div className="font-heading text-4xl font-bold text-accent-teal">{activities.length}</div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6"
+              className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-6"
             >
-              <div className="font-paragraph text-sm text-light-foreground/60 mb-2">Total Duration</div>
+              <div className="font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary mb-2">Total Duration</div>
               <div className="font-heading text-4xl font-bold text-accent-purple">{totalDuration} min</div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6"
+              className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-6"
             >
-              <div className="font-paragraph text-sm text-light-foreground/60 mb-2">Calories Burned</div>
+              <div className="font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary mb-2">Calories Burned</div>
               <div className="font-heading text-4xl font-bold text-accent-teal">{totalCalories}</div>
             </motion.div>
           </div>
@@ -247,14 +245,14 @@ export default function FitnessPage() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
-                    className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-accent-teal/30 transition-all duration-300"
+                    className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-6 hover:border-accent-teal/30 transition-all duration-300"
                   >
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
-                        <h3 className="font-heading text-2xl font-bold text-light-foreground mb-2">
+                        <h3 className="font-heading text-2xl font-bold text-light-text dark:text-dark-text mb-2">
                           {activity.activityType}
                         </h3>
-                        <div className="flex flex-wrap gap-4 font-paragraph text-sm text-light-foreground/60 mb-3">
+                        <div className="flex flex-wrap gap-4 font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary mb-3">
                           <span>{activity.duration} minutes</span>
                           <span>{activity.caloriesBurned} calories</span>
                           {activity.activityDate && (
@@ -262,7 +260,7 @@ export default function FitnessPage() {
                           )}
                         </div>
                         {activity.performanceNotes && (
-                          <p className="font-paragraph text-sm text-light-foreground/70">
+                          <p className="font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary">
                             {activity.performanceNotes}
                           </p>
                         )}
@@ -271,14 +269,14 @@ export default function FitnessPage() {
                     <div className="flex gap-2">
                       <Button
                         onClick={() => openEditDialog(activity)}
-                        className="flex-1 bg-white/5 text-accent-teal border border-accent-teal/30 hover:bg-accent-teal/10 font-paragraph text-sm"
+                        className="flex-1 bg-light-bg dark:bg-dark-bg text-accent-teal border border-accent-teal/30 hover:bg-accent-teal/10 font-paragraph text-sm"
                       >
                         <Edit2 className="w-4 h-4 mr-2" />
                         Edit
                       </Button>
                       <Button
                         onClick={() => handleDelete(activity._id)}
-                        className="flex-1 bg-white/5 text-destructive border border-destructive/30 hover:bg-destructive/10 font-paragraph text-sm"
+                        className="flex-1 bg-light-bg dark:bg-dark-bg text-destructive border border-destructive/30 hover:bg-destructive/10 font-paragraph text-sm"
                       >
                         <Trash2 className="w-4 h-4 mr-2" />
                         Delete
@@ -293,11 +291,11 @@ export default function FitnessPage() {
                 animate={{ opacity: 1 }}
                 className="text-center py-20"
               >
-                <Zap className="w-16 h-16 text-light-foreground/30 mx-auto mb-4" />
-                <h3 className="font-heading text-2xl font-bold text-light-foreground mb-2">
+                <Zap className="w-16 h-16 text-light-text-secondary dark:text-dark-text-secondary mx-auto mb-4" />
+                <h3 className="font-heading text-2xl font-bold text-light-text dark:text-dark-text mb-2">
                   No activities yet
                 </h3>
-                <p className="font-paragraph text-light-foreground/60 mb-6">
+                <p className="font-paragraph text-light-text-secondary dark:text-dark-text-secondary mb-6">
                   Start tracking your fitness journey by logging your first activity
                 </p>
               </motion.div>
@@ -306,6 +304,7 @@ export default function FitnessPage() {
         </div>
       </main>
 
+      <BottomNav />
       <Footer />
     </div>
   );

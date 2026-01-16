@@ -5,7 +5,7 @@ import { BaseCrudService } from '@/integrations';
 import { ProductivityLogs } from '@/entities';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import Sidebar from '@/components/Sidebar';
+import BottomNav from '@/components/BottomNav';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
@@ -13,7 +13,6 @@ import { Label } from '@/components/ui/label';
 
 export default function ProductivityPage() {
   const [isLoading, setIsLoading] = useState(true);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [logs, setLogs] = useState<ProductivityLogs[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingLog, setEditingLog] = useState<ProductivityLogs | null>(null);
@@ -107,10 +106,9 @@ export default function ProductivityPage() {
 
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
-      <Header onMenuClick={() => setSidebarOpen(true)} />
-      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <Header />
       
-      <main className="pt-24 pb-16 px-6 lg:px-8">
+      <main className="pt-24 pb-32 px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto space-y-8">
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
@@ -140,46 +138,46 @@ export default function ProductivityPage() {
                   Add Log
                 </Button>
               </DialogTrigger>
-              <DialogContent className="bg-dark-background border-white/10">
+              <DialogContent className="bg-light-surface dark:bg-dark-surface border-light-border dark:border-dark-border">
                 <DialogHeader>
-                  <DialogTitle className="font-heading text-2xl text-light-foreground">
+                  <DialogTitle className="font-heading text-2xl text-light-text dark:text-dark-text">
                     {editingLog ? 'Edit Log' : 'Create New Log'}
                   </DialogTitle>
                 </DialogHeader>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <Label htmlFor="taskOrSessionName" className="font-paragraph text-light-foreground">Task/Session Name</Label>
+                    <Label htmlFor="taskOrSessionName" className="font-paragraph text-light-text dark:text-dark-text">Task/Session Name</Label>
                     <Input
                       id="taskOrSessionName"
                       value={formData.taskOrSessionName}
                       onChange={(e) => setFormData({ ...formData, taskOrSessionName: e.target.value })}
                       required
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-paragraph"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="categoryTag" className="font-paragraph text-light-foreground">Category</Label>
+                    <Label htmlFor="categoryTag" className="font-paragraph text-light-text dark:text-dark-text">Category</Label>
                     <Input
                       id="categoryTag"
                       value={formData.categoryTag}
                       onChange={(e) => setFormData({ ...formData, categoryTag: e.target.value })}
                       placeholder="e.g., Work, Study, Project"
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-paragraph"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="durationMinutes" className="font-paragraph text-light-foreground">Duration (minutes)</Label>
+                    <Label htmlFor="durationMinutes" className="font-paragraph text-light-text dark:text-dark-text">Duration (minutes)</Label>
                     <Input
                       id="durationMinutes"
                       type="number"
                       min="0"
                       value={formData.durationMinutes}
                       onChange={(e) => setFormData({ ...formData, durationMinutes: Number(e.target.value) })}
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-paragraph"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="productivityScore" className="font-paragraph text-light-foreground">Productivity Score (1-10)</Label>
+                    <Label htmlFor="productivityScore" className="font-paragraph text-light-text dark:text-dark-text">Productivity Score (1-10)</Label>
                     <Input
                       id="productivityScore"
                       type="number"
@@ -187,17 +185,17 @@ export default function ProductivityPage() {
                       max="10"
                       value={formData.productivityScore}
                       onChange={(e) => setFormData({ ...formData, productivityScore: Number(e.target.value) })}
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-paragraph"
                     />
                   </div>
                   <div>
-                    <Label htmlFor="logDateTime" className="font-paragraph text-light-foreground">Date & Time</Label>
+                    <Label htmlFor="logDateTime" className="font-paragraph text-light-text dark:text-dark-text">Date & Time</Label>
                     <Input
                       id="logDateTime"
                       type="datetime-local"
                       value={formData.logDateTime}
                       onChange={(e) => setFormData({ ...formData, logDateTime: e.target.value })}
-                      className="bg-white/5 border-white/10 text-light-foreground font-paragraph"
+                      className="bg-light-bg dark:bg-dark-bg border-light-border dark:border-dark-border text-light-text dark:text-dark-text font-paragraph"
                     />
                   </div>
                   <Button
@@ -216,27 +214,27 @@ export default function ProductivityPage() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6"
+              className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-6"
             >
-              <div className="font-paragraph text-sm text-light-foreground/60 mb-2">Total Sessions</div>
+              <div className="font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary mb-2">Total Sessions</div>
               <div className="font-heading text-4xl font-bold text-accent-teal">{logs.length}</div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6"
+              className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-6"
             >
-              <div className="font-paragraph text-sm text-light-foreground/60 mb-2">Total Hours</div>
+              <div className="font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary mb-2">Total Hours</div>
               <div className="font-heading text-4xl font-bold text-accent-purple">{totalHours}h</div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6"
+              className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-6"
             >
-              <div className="font-paragraph text-sm text-light-foreground/60 mb-2">Avg Score</div>
+              <div className="font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary mb-2">Avg Score</div>
               <div className="font-heading text-4xl font-bold text-accent-teal">{avgScore}/10</div>
             </motion.div>
           </div>
@@ -251,7 +249,7 @@ export default function ProductivityPage() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05 }}
-                    className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-accent-teal/30 transition-all duration-300"
+                    className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-2xl p-6 hover:border-accent-teal/30 transition-all duration-300"
                   >
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                       <div className="flex-1">
@@ -262,10 +260,10 @@ export default function ProductivityPage() {
                             </span>
                           )}
                         </div>
-                        <h3 className="font-heading text-xl font-bold text-light-foreground mb-1">
+                        <h3 className="font-heading text-xl font-bold text-light-text dark:text-dark-text mb-1">
                           {log.taskOrSessionName}
                         </h3>
-                        <div className="flex flex-wrap gap-4 font-paragraph text-sm text-light-foreground/60">
+                        <div className="flex flex-wrap gap-4 font-paragraph text-sm text-light-text-secondary dark:text-dark-text-secondary">
                           <span>{log.durationMinutes} minutes</span>
                           <span>Score: {log.productivityScore}/10</span>
                           {log.logDateTime && (
@@ -276,14 +274,14 @@ export default function ProductivityPage() {
                       <div className="flex gap-2">
                         <Button
                           onClick={() => openEditDialog(log)}
-                          className="bg-white/5 text-accent-teal border border-accent-teal/30 hover:bg-accent-teal/10 font-paragraph text-sm"
+                          className="bg-light-bg dark:bg-dark-bg text-accent-teal border border-accent-teal/30 hover:bg-accent-teal/10 font-paragraph text-sm"
                         >
                           <Edit2 className="w-4 h-4 mr-2" />
                           Edit
                         </Button>
                         <Button
                           onClick={() => handleDelete(log._id)}
-                          className="bg-white/5 text-destructive border border-destructive/30 hover:bg-destructive/10 font-paragraph text-sm"
+                          className="bg-light-bg dark:bg-dark-bg text-destructive border border-destructive/30 hover:bg-destructive/10 font-paragraph text-sm"
                         >
                           <Trash2 className="w-4 h-4 mr-2" />
                           Delete
@@ -299,11 +297,11 @@ export default function ProductivityPage() {
                 animate={{ opacity: 1 }}
                 className="text-center py-20"
               >
-                <TrendingUp className="w-16 h-16 text-light-foreground/30 mx-auto mb-4" />
-                <h3 className="font-heading text-2xl font-bold text-light-foreground mb-2">
+                <TrendingUp className="w-16 h-16 text-light-text-secondary dark:text-dark-text-secondary mx-auto mb-4" />
+                <h3 className="font-heading text-2xl font-bold text-light-text dark:text-dark-text mb-2">
                   No logs yet
                 </h3>
-                <p className="font-paragraph text-light-foreground/60 mb-6">
+                <p className="font-paragraph text-light-text-secondary dark:text-dark-text-secondary mb-6">
                   Start tracking your productivity by creating your first log
                 </p>
               </motion.div>
@@ -312,6 +310,7 @@ export default function ProductivityPage() {
         </div>
       </main>
 
+      <BottomNav />
       <Footer />
     </div>
   );

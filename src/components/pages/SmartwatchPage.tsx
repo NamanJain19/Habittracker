@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Watch, Smartphone, Watch as WatchIcon } from 'lucide-react';
+import { Watch, Smartphone } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
@@ -14,18 +14,12 @@ export default function SmartwatchPage() {
     setConnectionStatus('coming-soon');
   };
 
-  const supportedDevices = [
-    { name: 'Google Fit', icon: '🏃' },
-    { name: 'Apple Health', icon: '🍎' },
-    { name: 'Fitbit', icon: '⌚' },
-  ];
-
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
       <Header onMenuClick={() => setSidebarOpen(true)} />
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      <main className="pt-24 pb-16 px-4 sm:px-6 lg:px-8">
+      <main className="pt-24 pb-32 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto">
           {/* Header */}
           <motion.div
@@ -34,10 +28,10 @@ export default function SmartwatchPage() {
             className="text-center mb-12"
           >
             <h1 className="text-4xl lg:text-5xl font-bold text-light-text dark:text-dark-text mb-4">
-              Smartwatch Integration
+              Connect Your Smartwatch
             </h1>
             <p className="text-lg text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto">
-              Connect your smartwatch to sync fitness data and track your wellness journey
+              Sync your smartwatch to track activity and wellness data
             </p>
           </motion.div>
 
@@ -61,7 +55,7 @@ export default function SmartwatchPage() {
 
               {/* Description */}
               <p className="text-light-text-secondary dark:text-dark-text-secondary mb-6 max-w-md mx-auto">
-                Sync your fitness data to track activity and wellness
+                Sync your smartwatch to track activity and wellness data
               </p>
 
               {/* Status */}
@@ -69,7 +63,7 @@ export default function SmartwatchPage() {
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-light-bg dark:bg-dark-bg border border-light-border dark:border-dark-border">
                   <div className={`w-2 h-2 rounded-full ${connectionStatus === 'not-connected' ? 'bg-light-text-secondary dark:bg-dark-text-secondary' : 'bg-primary'}`} />
                   <span className="text-sm text-light-text dark:text-dark-text">
-                    {connectionStatus === 'not-connected' ? 'No smartwatch connected' : 'Connection feature coming soon'}
+                    {connectionStatus === 'not-connected' ? 'No smartwatch connected' : 'Smartwatch connection coming soon'}
                   </span>
                 </div>
               </div>
@@ -83,24 +77,10 @@ export default function SmartwatchPage() {
                 Connect Smartwatch
               </Button>
 
-              {/* Supported Devices */}
+              {/* Universal Support Message */}
               <div className="border-t border-light-border dark:border-dark-border pt-6">
-                <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary mb-4">
-                  Supported Devices
-                </p>
-                <div className="flex flex-wrap justify-center gap-3 mb-4">
-                  {supportedDevices.map((device) => (
-                    <div
-                      key={device.name}
-                      className="flex items-center gap-2 px-4 py-2 rounded-lg bg-light-bg dark:bg-dark-bg border border-light-border dark:border-dark-border"
-                    >
-                      <span className="text-lg">{device.icon}</span>
-                      <span className="text-sm text-light-text dark:text-dark-text">{device.name}</span>
-                    </div>
-                  ))}
-                </div>
-                <p className="text-xs text-light-text-secondary dark:text-dark-text-secondary">
-                  More devices coming soon
+                <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                  Supports all smartwatches and fitness wearables
                 </p>
               </div>
             </div>
