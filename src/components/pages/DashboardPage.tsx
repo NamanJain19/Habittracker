@@ -17,10 +17,17 @@ export default function DashboardPage() {
   const [wellnessCheckins, setWellnessCheckins] = useState<WellnessCheckins[]>([]);
   const [productivityLogs, setProductivityLogs] = useState<ProductivityLogs[]>([]);
   const [reminders, setReminders] = useState<Reminders[]>([]);
+  const [smartwatchConnected, setSmartwatchConnected] = useState(false);
 
   useEffect(() => {
     loadDashboardData();
+    checkSmartwatchConnection();
   }, []);
+
+  const checkSmartwatchConnection = () => {
+    const status = localStorage.getItem('smartwatch-connection-status');
+    setSmartwatchConnected(status === 'connected');
+  };
 
   const loadDashboardData = async () => {
     setIsLoading(true);
@@ -96,7 +103,7 @@ export default function DashboardPage() {
       count: 0,
       textColor: 'text-primary',
       link: '/tracker/smartwatch',
-      status: 'Not Connected',
+      status: smartwatchConnected ? 'Connected via Mobile ✅' : 'Not Connected',
     },
   ];
 
