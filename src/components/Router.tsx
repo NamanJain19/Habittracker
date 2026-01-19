@@ -8,7 +8,7 @@ import DashboardPage from '@/components/pages/DashboardPage';
 import HabitsPage from '@/components/pages/HabitsPage';
 import GoalsPage from '@/components/pages/GoalsPage';
 import ProductivityPage from '@/components/pages/ProductivityPage';
-import FitnessPage from '@/components/pages/FitnessPage';
+import SmartFitnessPage from '@/components/pages/SmartFitnessPage';
 import WellnessPage from '@/components/pages/WellnessPage';
 import CommunityPage from '@/components/pages/CommunityPage';
 import RemindersPage from '@/components/pages/RemindersPage';
@@ -19,7 +19,6 @@ import SupportPage from '@/components/pages/SupportPage';
 import PrivacyPage from '@/components/pages/PrivacyPage';
 import TermsPage from '@/components/pages/TermsPage';
 import ContactPage from '@/components/pages/ContactPage';
-import SmartFitnessPage from '@/components/pages/SmartFitnessPage';
 import SmartwatchPage from '@/components/pages/SmartwatchPage';
 
 // Layout component that includes ScrollToTop
@@ -93,7 +92,7 @@ const router = createBrowserRouter([
         path: "fitness",
         element: (
           <MemberProtectedRoute messageToSignIn="Sign in to track your fitness">
-            <FitnessPage />
+            <SmartFitnessPage />
           </MemberProtectedRoute>
         ),
         routeMetadata: {
