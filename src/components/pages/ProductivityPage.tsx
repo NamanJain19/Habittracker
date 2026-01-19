@@ -107,7 +107,6 @@ export default function ProductivityPage() {
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
       <Header />
-      
       <main className="pt-24 pb-32 px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto space-y-8">
           {/* Header */}
@@ -118,8 +117,8 @@ export default function ProductivityPage() {
               className="space-y-2"
             >
               <h1 className="font-heading text-5xl lg:text-6xl font-bold">
-                <span className="text-light-foreground">Productivity</span>{' '}
-                <span className="bg-gradient-to-r from-accent-teal to-accent-purple bg-clip-text text-transparent">
+                <span className="text-info">Productivity</span>{' '}
+                <span className="bg-gradient-to-r from-accent-teal to-accent-purple bg-clip-text text-accent-teal">
                   Tracker
                 </span>
               </h1>
@@ -309,7 +308,6 @@ export default function ProductivityPage() {
           </div>
         </div>
       </main>
-
       <BottomNav />
       <Footer />
     </div>

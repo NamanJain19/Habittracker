@@ -104,7 +104,6 @@ export default function FitnessPage() {
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
       <Header />
-      
       <main className="pt-24 pb-32 px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto space-y-8">
           {/* Header */}
@@ -276,7 +275,7 @@ export default function FitnessPage() {
                       </Button>
                       <Button
                         onClick={() => handleDelete(activity._id)}
-                        className="flex-1 bg-light-bg dark:bg-dark-bg text-destructive border border-destructive/30 hover:bg-destructive/10 font-paragraph text-sm"
+                        className="flex-1 dark:bg-dark-bg border border-destructive/30 hover:bg-destructive/10 font-paragraph text-sm bg-primary-light text-accent-teal"
                       >
                         <Trash2 className="w-4 h-4 mr-2" />
                         Delete
@@ -303,7 +302,6 @@ export default function FitnessPage() {
           </div>
         </div>
       </main>
-
       <BottomNav />
       <Footer />
     </div>
