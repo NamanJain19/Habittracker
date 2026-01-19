@@ -105,7 +105,6 @@ export default function SmartFitnessPage() {
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
       <Header onMenuClick={() => setSidebarOpen(true)} />
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-
       <main className="max-w-[100rem] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
         {/* Hero Section */}
         <motion.div
@@ -144,7 +143,7 @@ export default function SmartFitnessPage() {
             <TabsTrigger value="insights" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white">
               AI Insights
             </TabsTrigger>
-            <TabsTrigger value="reminders" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white">
+            <TabsTrigger value="reminders" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-light-foreground">
               Reminders
             </TabsTrigger>
           </TabsList>
@@ -716,7 +715,6 @@ export default function SmartFitnessPage() {
           </TabsContent>
         </Tabs>
       </main>
-
       <Footer />
     </div>
   );

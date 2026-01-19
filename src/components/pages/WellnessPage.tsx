@@ -122,7 +122,6 @@ export default function WellnessPage() {
   return (
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
       <Header />
-      
       <main className="pt-24 pb-32 px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto space-y-8">
           {/* Header */}
@@ -321,7 +320,7 @@ export default function WellnessPage() {
                         </Button>
                         <Button
                           onClick={() => handleDelete(checkin._id)}
-                          className="bg-light-bg dark:bg-dark-bg text-destructive border border-destructive/30 hover:bg-destructive/10 font-paragraph text-sm"
+                          className="bg-light-bg dark:bg-dark-bg border border-destructive/30 hover:bg-destructive/10 font-paragraph text-sm text-error"
                         >
                           <Trash2 className="w-4 h-4 mr-2" />
                           Delete
@@ -349,7 +348,6 @@ export default function WellnessPage() {
           </div>
         </div>
       </main>
-
       <BottomNav />
       <Footer />
     </div>

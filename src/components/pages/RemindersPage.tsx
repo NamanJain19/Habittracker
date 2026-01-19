@@ -196,7 +196,6 @@ export default function RemindersPage() {
     <div className="min-h-screen bg-light-bg dark:bg-dark-bg">
       <Header onMenuClick={() => setSidebarOpen(true)} />
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-      
       <main className="pt-24 pb-16 px-6 lg:px-8">
         <div className="max-w-[100rem] mx-auto space-y-8">
           {/* Header */}
@@ -321,7 +320,7 @@ export default function RemindersPage() {
               className="glass-card glass-card-hover neomorph-shadow p-6"
             >
               <div className="font-paragraph text-sm text-[var(--text-secondary)] mb-2">Total Reminders</div>
-              <div className="font-heading text-4xl font-bold text-accent-cyan">{reminders.length}</div>
+              <div className="font-heading text-4xl font-bold text-light-surface">{reminders.length}</div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -363,7 +362,7 @@ export default function RemindersPage() {
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
                           {reminder.trackerCategory && (
-                            <span className="font-paragraph text-xs px-3 py-1 rounded-full bg-accent-cyan/20 text-accent-cyan border border-accent-cyan/30">
+                            <span className="font-paragraph text-xs px-3 py-1 rounded-full bg-accent-cyan/20 border border-accent-cyan/30 text-primary">
                               {reminder.trackerCategory}
                             </span>
                           )}
@@ -406,7 +405,7 @@ export default function RemindersPage() {
                     <div className="flex gap-2">
                       <Button
                         onClick={() => openEditDialog(reminder)}
-                        className="flex-1 bg-[var(--bg-elevated)] text-accent-cyan border border-accent-cyan/30 hover:bg-accent-cyan/10 font-paragraph text-sm"
+                        className="flex-1 bg-[var(--bg-elevated)] border border-accent-cyan/30 hover:bg-accent-cyan/10 font-paragraph text-sm text-primary-hover"
                       >
                         <Edit2 className="w-4 h-4 mr-2" />
                         Edit
@@ -440,7 +439,6 @@ export default function RemindersPage() {
           </div>
         </div>
       </main>
-
       <Footer />
     </div>
   );
