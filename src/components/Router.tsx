@@ -91,7 +91,7 @@ const router = createBrowserRouter([
       {
         path: "fitness",
         element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to track your fitness">
+          <MemberProtectedRoute messageToSignIn="Sign in to access Smart Fitness & Body Analysis">
             <SmartFitnessPage />
           </MemberProtectedRoute>
         ),
@@ -190,18 +190,7 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "tracker/smart-fitness",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to access Smart Fitness & Body Analysis">
-            <SmartFitnessPage />
-          </MemberProtectedRoute>
-        ),
-        routeMetadata: {
-          pageIdentifier: 'smart-fitness',
-        },
-      },
-      {
-        path: "tracker/smartwatch",
+        path: "smartwatch",
         element: (
           <MemberProtectedRoute messageToSignIn="Sign in to access Smartwatch Integration">
             <SmartwatchPage />
