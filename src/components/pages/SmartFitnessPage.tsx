@@ -140,10 +140,10 @@ export default function SmartFitnessPage() {
             <TabsTrigger value="body" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-dark-text-secondary">
               Body Analysis
             </TabsTrigger>
-            <TabsTrigger value="insights" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-light-foreground">
+            <TabsTrigger value="insights" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-dark-text-secondary">
               AI Insights
             </TabsTrigger>
-            <TabsTrigger value="reminders" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-light-foreground">
+            <TabsTrigger value="reminders" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-dark-text-secondary">
               Reminders
             </TabsTrigger>
           </TabsList>
