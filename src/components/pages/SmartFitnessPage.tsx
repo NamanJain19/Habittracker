@@ -117,7 +117,7 @@ export default function SmartFitnessPage() {
               <h1 className="text-3xl sm:text-4xl font-bold text-light-text dark:text-dark-text mb-2">
                 Smart Fitness & Body Analysis
               </h1>
-              <p className="text-light-text-secondary dark:text-dark-text-secondary">
+              <p className="dark:text-dark-text-secondary text-primary-light">
                 Track your fitness journey, monitor your health, and get AI-powered insights
               </p>
             </div>
@@ -131,16 +131,16 @@ export default function SmartFitnessPage() {
         {/* Tabs Navigation */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-xl p-1 mb-8 w-full sm:w-auto overflow-x-auto">
-            <TabsTrigger value="overview" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white">
+            <TabsTrigger value="overview" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-light-foreground">
               Overview
             </TabsTrigger>
-            <TabsTrigger value="workout" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white">
+            <TabsTrigger value="workout" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-light-foreground">
               Workouts
             </TabsTrigger>
-            <TabsTrigger value="body" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white">
+            <TabsTrigger value="body" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-light-foreground">
               Body Analysis
             </TabsTrigger>
-            <TabsTrigger value="insights" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white">
+            <TabsTrigger value="insights" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-light-foreground">
               AI Insights
             </TabsTrigger>
             <TabsTrigger value="reminders" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-light-foreground">
