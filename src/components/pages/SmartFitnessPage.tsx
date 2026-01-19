@@ -137,7 +137,7 @@ export default function SmartFitnessPage() {
             <TabsTrigger value="workout" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-dark-text-secondary">
               Workouts
             </TabsTrigger>
-            <TabsTrigger value="body" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-light-foreground">
+            <TabsTrigger value="body" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-dark-text-secondary">
               Body Analysis
             </TabsTrigger>
             <TabsTrigger value="insights" className="rounded-lg px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-white text-light-foreground">
