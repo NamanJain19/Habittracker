@@ -122,7 +122,7 @@ export default function ProductivityPage() {
                   Tracker
                 </span>
               </h1>
-              <p className="font-paragraph text-lg text-primary-light">
+              <p className="font-paragraph text-lg text-dark-text-secondary">
                 Log and analyze your productivity metrics
               </p>
             </motion.div>
