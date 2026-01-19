@@ -117,12 +117,12 @@ export default function ProductivityPage() {
               className="space-y-2"
             >
               <h1 className="font-heading text-5xl lg:text-6xl font-bold">
-                <span className="text-info">Productivity</span>{' '}
+                <span className="text-light-bg">Productivity</span>{' '}
                 <span className="bg-gradient-to-r from-accent-teal to-accent-purple bg-clip-text text-accent-teal">
                   Tracker
                 </span>
               </h1>
-              <p className="font-paragraph text-lg text-light-foreground/70">
+              <p className="font-paragraph text-lg text-primary-light">
                 Log and analyze your productivity metrics
               </p>
             </motion.div>
@@ -280,7 +280,7 @@ export default function ProductivityPage() {
                         </Button>
                         <Button
                           onClick={() => handleDelete(log._id)}
-                          className="bg-light-bg dark:bg-dark-bg text-destructive border border-destructive/30 hover:bg-destructive/10 font-paragraph text-sm"
+                          className="bg-light-bg dark:bg-dark-bg border border-destructive/30 hover:bg-destructive/10 font-paragraph text-sm text-error"
                         >
                           <Trash2 className="w-4 h-4 mr-2" />
                           Delete
