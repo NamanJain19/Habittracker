@@ -1,147 +1,130 @@
-# Wixstro - Wix Astro Template
+# AI-Powered Habit & Fitness Tracker (Web + App)
 
-A modern, full-featured Wix Astro template built with React, TypeScript, and Tailwind CSS. This template provides a solid foundation for building dynamic, interactive websites with Wix's powerful ecosystem.
+A user-friendly **Habit, Productivity, and Fitness Tracking platform** designed with a strong focus on **UI/UX, responsive design, and app-like navigation**.  
+The project is built as a **web application** and also converted into a **mobile app**, maintaining the same features and user experience across platforms.
 
-## 🚀 Features
-
-- **Astro Framework** - Modern static site generator with server-side rendering
-- **React Integration** - Full React support with JSX components
-- **TypeScript** - Type-safe development experience
-- **Tailwind CSS** - Utility-first CSS framework with custom components
-- **Wix Integration** - Seamless integration with Wix services and APIs
-- **Modern UI Components** - Radix UI components with custom styling
-- **Authentication** - Built-in member authentication and protected routes
-- **CMS Integration** - Content management system integration
-- **Client-side Routing** - React Router for seamless navigation
-- **Responsive Design** - Mobile-first responsive design
-- **Testing** - Vitest testing framework setup
-- **Development Tools** - ESLint, TypeScript checking, and more
-
-## 🛠️ Tech Stack
-
-- **Framework**: Astro 5.8.0
-- **Frontend**: React 18.3.0
-- **Styling**: Tailwind CSS 3.4.14
-- **Language**: TypeScript 5.8.3
-- **UI Components**: Radix UI
-- **State Management**: Zustand
-- **Forms**: React Hook Form with Zod validation
-- **Testing**: Vitest
-- **Build Tool**: Vite
-- **Deployment**: Cloudflare
-
-
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js (version 18 or higher)
-- npm or yarn package manager
-- Wix account and site
-
-### Installation
-
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-2. **Set up environment variables**:
-   ```bash
-   npm run env
-   ```
-
-3. **Start development server**:
-   ```bash
-   npm run dev
-   ```
-
-The development server will start and you can view your site at `http://localhost:4321`.
-
-## 📁 Project Structure
-
-```
-main/
-├── src/
-│   ├── components/          # React components
-│   │   ├── ui/             # Reusable UI components
-│   │   ├── Head.tsx        # Page head component
-│   │   └── Router.tsx      # Routing component
-│   ├── hooks/              # Custom React hooks
-│   ├── lib/                # Utility functions
-│   ├── pages/              # Astro pages
-│   └── styles/             # Global styles
-├── integrations/           # Wix integrations
-│   ├── cms/               # CMS integration
-│   └── members/           # Member authentication
-├── public/                # Static assets
-└── eslint-rules/          # Custom ESLint rules
-```
-
-## 🎨 UI Components
-
-This template includes a comprehensive set of UI components built with Radix UI and styled with Tailwind CSS:
-
-- **Layout**: Accordion, Collapsible, Tabs, Sheet
-- **Forms**: Input, Select, Checkbox, Radio Group, Switch
-- **Navigation**: Navigation Menu, Menubar, Breadcrumb
-- **Feedback**: Alert, Toast, Progress, Skeleton
-- **Overlays**: Dialog, Popover, Tooltip, Hover Card
-- **Data Display**: Table, Card, Badge, Avatar
-- **Interactive**: Button, Toggle, Slider, Command
-
-## 🔧 Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run release` - Release to Wix
-- `npm run env` - Pull environment variables
-- `npm run check` - Type check with Astro
-- `npm run test:run` - Run tests
-- `npm install` - Install dependencies
-
-## 🧪 Testing
-
-The project includes Vitest for testing:
-
-```bash
-npm run test:run
-```
-
-## 📱 Responsive Design
-
-The template is built with a mobile-first approach and includes:
-
-- Responsive breakpoints
-- Touch-friendly interactions
-- Optimized images
-- Flexible layouts
-
-## 🚀 Deployment
-
-The template is configured for deployment on Cloudflare:
-
-```bash
-npm run build
-```
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests and linting
-5. Submit a pull request
-
-## 🆘 Support
-
-For support and questions:
-
-- Check the [Wix Developer Documentation](https://dev.wix.com/)
-- Review the [Astro Documentation](https://docs.astro.build/)
-
+🔗 **Live Website:**  
+https://my-site-tt1k2jaf-jainnikku1912.wix-vibe.com
 
 ---
 
-Built with ❤️ using Wix Vibe, Astro, and modern web technologies.
+## 📌 Project Overview
+
+This project helps users:
+- Build and maintain daily habits
+- Track productivity and wellness
+- Manage fitness activities
+- Use smart fitness features with or without a smartwatch
+
+The platform is designed to be **simple, beginner-friendly, and daily usable**, avoiding unnecessary complexity or unrealistic hardware claims.
+
+---
+
+## ✨ Key Features
+
+- ✅ Habit Tracker (multiple habit types)
+- ✅ Productivity Tracking
+- ✅ Wellness & Lifestyle Tracking
+- ✅ Fitness & Smart Fitness (combined module)
+- ✅ Smartwatch connection via **mobile-based architecture**
+- ✅ Light / Dark Mode (global theme control)
+- ✅ App-like navigation (Top header, Bottom navigation, Sidebar)
+- ✅ Responsive design (Web + Mobile)
+- ✅ Profile & user management
+- ✅ Android App (APK) created from the website
+
+---
+
+## ⌚ Smartwatch Integration (Realistic Architecture)
+
+This project follows an **industry-standard approach** for smartwatch connectivity:
+
+- No direct Bluetooth scanning from the website
+- Smartwatch data is intended to sync via mobile fitness platforms
+- Designed to be scalable for future integration with:
+  - Google Fit
+  - Apple Health
+  - Fitbit (future-ready)
+
+⚠️ This project focuses on **fitness and wellness**, not medical or clinical tracking.
+
+---
+
+## 🎨 UI / UX Focus
+
+- Clean and simple interface
+- Mobile-app–like experience on web
+- Bottom navigation for quick access
+- Sidebar for full feature access
+- Light and Dark mode with consistent theming
+- High readability and accessibility
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend & Platform
+- Wix Studio (Wix Vibe)
+- HTML
+- CSS
+- JavaScript (Velo by Wix)
+
+### Design & UX
+- UI/UX Design
+- Responsive Web Design
+- Light/Dark Theme System
+- App-like Navigation Patterns
+
+### App Conversion
+- Web-to-App (APK build)
+- PWA / WebView-based architecture
+
+---
+
+## 🧠 Skills Demonstrated
+
+- UI/UX Design
+- Web Development
+- Responsive Design
+- Theme Management (Light/Dark Mode)
+- State-Based UI Logic
+- No-Code / Low-Code Development
+- Product & System Design Thinking
+
+---
+
+## 🚀 How to Use
+
+1. Open the live website link
+2. Create / log in to a user account
+3. Explore habit, productivity, and fitness trackers
+4. Switch between Light and Dark mode
+5. Use the app version for a mobile-first experience
+
+---
+
+## 📌 Project Status
+
+- ✔ Core features completed
+- ✔ Web version live
+- ✔ Android app (APK) generated
+- 🔄 Future scope: Real fitness API integration via backend
+
+---
+
+## 📬 Feedback
+
+Feedback, suggestions, and improvements are always welcome.  
+This project was built as a **learning-focused, portfolio-ready application** with real-world design principles.
+
+---
+
+## ⭐ Acknowledgment
+
+This project demonstrates practical application of **UI/UX principles, web development, and system architecture** using modern no-code and low-code tools.
+
+---
+
+**Thank you for checking out this project! 🚀**
+
+
