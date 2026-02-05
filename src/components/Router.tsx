@@ -1,7 +1,6 @@
 import { MemberProvider } from '@/integrations';
 import { createBrowserRouter, RouterProvider, Navigate, Outlet } from 'react-router-dom';
 import { ScrollToTop } from '@/lib/scroll-to-top';
-import { MemberProtectedRoute } from '@/components/ui/member-protected-route';
 import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
 import HomePage from '@/components/pages/HomePage';
 import DashboardPage from '@/components/pages/DashboardPage';
@@ -46,110 +45,70 @@ const router = createBrowserRouter([
       },
       {
         path: "dashboard",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to access your dashboard">
-            <DashboardPage />
-          </MemberProtectedRoute>
-        ),
+        element: <DashboardPage />,
         routeMetadata: {
           pageIdentifier: 'dashboard',
         },
       },
       {
         path: "habits",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to track your habits">
-            <HabitsPage />
-          </MemberProtectedRoute>
-        ),
+        element: <HabitsPage />,
         routeMetadata: {
           pageIdentifier: 'habits',
         },
       },
       {
         path: "goals",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to manage your goals">
-            <GoalsPage />
-          </MemberProtectedRoute>
-        ),
+        element: <GoalsPage />,
         routeMetadata: {
           pageIdentifier: 'goals',
         },
       },
       {
         path: "productivity",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to track your productivity">
-            <ProductivityPage />
-          </MemberProtectedRoute>
-        ),
+        element: <ProductivityPage />,
         routeMetadata: {
           pageIdentifier: 'productivity',
         },
       },
       {
         path: "fitness",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to access Smart Fitness & Body Analysis">
-            <SmartFitnessPage />
-          </MemberProtectedRoute>
-        ),
+        element: <SmartFitnessPage />,
         routeMetadata: {
           pageIdentifier: 'fitness',
         },
       },
       {
         path: "wellness",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to track your wellness">
-            <WellnessPage />
-          </MemberProtectedRoute>
-        ),
+        element: <WellnessPage />,
         routeMetadata: {
           pageIdentifier: 'wellness',
         },
       },
       {
         path: "community",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to join the community">
-            <CommunityPage />
-          </MemberProtectedRoute>
-        ),
+        element: <CommunityPage />,
         routeMetadata: {
           pageIdentifier: 'community',
         },
       },
       {
         path: "reminders",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to manage your reminders">
-            <RemindersPage />
-          </MemberProtectedRoute>
-        ),
+        element: <RemindersPage />,
         routeMetadata: {
           pageIdentifier: 'reminders',
         },
       },
       {
         path: "profile",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to view your profile">
-            <ProfilePage />
-          </MemberProtectedRoute>
-        ),
+        element: <ProfilePage />,
         routeMetadata: {
           pageIdentifier: 'profile',
         },
       },
       {
         path: "settings",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to manage your settings">
-            <SettingsPage />
-          </MemberProtectedRoute>
-        ),
+        element: <SettingsPage />,
         routeMetadata: {
           pageIdentifier: 'settings',
         },
@@ -191,11 +150,7 @@ const router = createBrowserRouter([
       },
       {
         path: "smartwatch",
-        element: (
-          <MemberProtectedRoute messageToSignIn="Sign in to access Smartwatch Integration">
-            <SmartwatchPage />
-          </MemberProtectedRoute>
-        ),
+        element: <SmartwatchPage />,
         routeMetadata: {
           pageIdentifier: 'smartwatch',
         },

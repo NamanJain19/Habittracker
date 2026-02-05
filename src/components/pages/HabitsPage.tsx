@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2, Plus, Flame, Edit2, Trash2 } from 'lucide-react';
 import { BaseCrudService } from '@/integrations';
+import { useMember } from '@/integrations';
 import { Habits } from '@/entities';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -12,13 +13,16 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Image } from '@/components/ui/image';
+import { LoginPromptModal } from '@/components/ui/login-prompt-modal';
 
 export default function HabitsPage() {
+  const { isAuthenticated } = useMember();
   const [isLoading, setIsLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [habits, setHabits] = useState<Habits[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingHabit, setEditingHabit] = useState<Habits | null>(null);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const [formData, setFormData] = useState({
     habitName: '',
     frequency: 'Daily',
@@ -46,6 +50,12 @@ export default function HabitsPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (!isAuthenticated) {
+      setIsDialogOpen(false);
+      setShowLoginPrompt(true);
+      return;
+    }
+    
     try {
       if (editingHabit) {
         await BaseCrudService.update<Habits>('habits', {
@@ -69,6 +79,11 @@ export default function HabitsPage() {
   };
 
   const handleDelete = async (id: string) => {
+    if (!isAuthenticated) {
+      setShowLoginPrompt(true);
+      return;
+    }
+    
     setHabits(habits.filter(h => h._id !== id));
     try {
       await BaseCrudService.delete('habits', id);
@@ -78,6 +93,11 @@ export default function HabitsPage() {
   };
 
   const toggleComplete = async (habit: Habits) => {
+    if (!isAuthenticated) {
+      setShowLoginPrompt(true);
+      return;
+    }
+    
     const newCompleted = !habit.isCompleted;
     const newStreak = newCompleted ? (habit.streakCount || 0) + 1 : habit.streakCount;
     
@@ -151,7 +171,16 @@ export default function HabitsPage() {
               if (!open) resetForm();
             }}>
               <DialogTrigger asChild>
-                <Button className="bg-primary text-white hover:bg-primary-hover font-bold py-3 px-6 rounded-lg shadow-soft hover:shadow-soft-hover transition-all">
+                <Button 
+                  onClick={() => {
+                    if (!isAuthenticated) {
+                      setShowLoginPrompt(true);
+                    } else {
+                      setIsDialogOpen(true);
+                    }
+                  }}
+                  className="bg-primary text-white hover:bg-primary-hover font-bold py-3 px-6 rounded-lg shadow-soft hover:shadow-soft-hover transition-all"
+                >
                   <Plus className="w-5 h-5 mr-2" />
                   Add Habit
                 </Button>
@@ -292,6 +321,12 @@ export default function HabitsPage() {
       </main>
 
       <Footer />
+      <LoginPromptModal 
+        isOpen={showLoginPrompt} 
+        onClose={() => setShowLoginPrompt(false)}
+        title="Sign in required"
+        message="Please sign in to save your progress and use this feature."
+      />
     </div>
   );
 }

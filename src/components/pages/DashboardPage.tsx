@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Target, TrendingUp, Heart, Zap, Calendar, CheckCircle2, Activity, Brain } from 'lucide-react';
 import { BaseCrudService } from '@/integrations';
+import { useMember } from '@/integrations';
 import { Habits, Goals, FitnessActivities, WellnessCheckins, ProductivityLogs, Reminders } from '@/entities';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -10,6 +11,7 @@ import BottomNav from '@/components/BottomNav';
 import { LoadingSpinner } from '@/components/ui/loading-spinner';
 
 export default function DashboardPage() {
+  const { isAuthenticated } = useMember();
   const [isLoading, setIsLoading] = useState(true);
   const [habits, setHabits] = useState<Habits[]>([]);
   const [goals, setGoals] = useState<Goals[]>([]);
@@ -150,7 +152,7 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-primary">
-                    {completedHabits}/{habits.length}
+                    {isAuthenticated ? `${habits.filter(h => h.isCompleted).length}/${habits.length}` : '0/0'}
                   </div>
                   <div className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
                     Habits Completed
@@ -171,7 +173,7 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-accent-teal">
-                    {activeGoals}
+                    {isAuthenticated ? goals.filter(g => (g.progressPercentage || 0) < 100).length : '0'}
                   </div>
                   <div className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
                     Active Goals
@@ -192,7 +194,9 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-accent-purple">
-                    {avgMood}/10
+                    {isAuthenticated && wellnessCheckins.length > 0
+                      ? (wellnessCheckins.reduce((sum, w) => sum + (w.moodRating || 0), 0) / wellnessCheckins.length).toFixed(1)
+                      : '0'}/10
                   </div>
                   <div className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
                     Avg Mood Rating

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Plus, Edit2, Trash2, Bell, BellOff, Clock, AlertCircle } from 'lucide-react';
 import { BaseCrudService } from '@/integrations';
+import { useMember } from '@/integrations';
 import { Reminders } from '@/entities';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -13,14 +14,17 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
+import { LoginPromptModal } from '@/components/ui/login-prompt-modal';
 
 export default function RemindersPage() {
+  const { isAuthenticated } = useMember();
   const [isLoading, setIsLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [reminders, setReminders] = useState<Reminders[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingReminder, setEditingReminder] = useState<Reminders | null>(null);
   const [notificationPermission, setNotificationPermission] = useState<NotificationPermission>('default');
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     reminderTitle: '',

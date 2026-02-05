@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Target, Plus, Edit2, Trash2 } from 'lucide-react';
 import { BaseCrudService } from '@/integrations';
+import { useMember } from '@/integrations';
 import { Goals } from '@/entities';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -12,13 +13,16 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Progress } from '@/components/ui/progress';
+import { LoginPromptModal } from '@/components/ui/login-prompt-modal';
 
 export default function GoalsPage() {
+  const { isAuthenticated } = useMember();
   const [isLoading, setIsLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [goals, setGoals] = useState<Goals[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingGoal, setEditingGoal] = useState<Goals | null>(null);
+  const [showLoginPrompt, setShowLoginPrompt] = useState(false);
   const [formData, setFormData] = useState({
     goalTitle: '',
     description: '',
@@ -46,6 +50,12 @@ export default function GoalsPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (!isAuthenticated) {
+      setIsDialogOpen(false);
+      setShowLoginPrompt(true);
+      return;
+    }
+    
     try {
       if (editingGoal) {
         await BaseCrudService.update<Goals>('goals', {
@@ -69,6 +79,11 @@ export default function GoalsPage() {
   };
 
   const handleDelete = async (id: string) => {
+    if (!isAuthenticated) {
+      setShowLoginPrompt(true);
+      return;
+    }
+    
     setGoals(goals.filter(g => g._id !== id));
     try {
       await BaseCrudService.delete('goals', id);
@@ -130,7 +145,16 @@ export default function GoalsPage() {
               if (!open) resetForm();
             }}>
               <DialogTrigger asChild>
-                <Button className="bg-primary text-white hover:bg-primary-hover font-bold py-3 px-6 rounded-lg shadow-soft hover:shadow-soft-hover transition-all">
+                <Button 
+                  onClick={() => {
+                    if (!isAuthenticated) {
+                      setShowLoginPrompt(true);
+                    } else {
+                      setIsDialogOpen(true);
+                    }
+                  }}
+                  className="bg-primary text-white hover:bg-primary-hover font-bold py-3 px-6 rounded-lg shadow-soft hover:shadow-soft-hover transition-all"
+                >
                   <Plus className="w-5 h-5 mr-2" />
                   Add Goal
                 </Button>
@@ -295,6 +319,12 @@ export default function GoalsPage() {
       </main>
 
       <Footer />
+      <LoginPromptModal 
+        isOpen={showLoginPrompt} 
+        onClose={() => setShowLoginPrompt(false)}
+        title="Sign in required"
+        message="Please sign in to save your progress and use this feature."
+      />
     </div>
   );
 }
